@@ -1,0 +1,117 @@
+body {
+    color: rgb(15, 65, 73);
+    background-color: #cbe9e9;
+    display: flex;
+    align-items: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    justify-content: center;
+    min-height: 100dvh;
+
+}
+main{
+    background-color: #438a8a;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    width: 380px;
+
+    header{
+       
+        h1{
+            text-align: center;
+            border: 1px solid rgb(99, 162, 157);
+            border-radius: 2rem;
+            margin: 0;
+        }
+        section.info{
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            div{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                span{
+                    border-radius: 50%;
+                    background-color: rgb(218, 231, 230);
+                    color: rgb(45, 133, 133);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 30px;
+                    width: 30px;
+
+                }
+
+            }
+        }
+    }
+    section.list{
+        article {
+            background-color: #47a9a7;
+            border-radius: 0.8rem;
+            display: flex;
+            margin-bottom: 0.7rem;
+            justify-content: space-between;
+            padding-inline: 0.4rem;
+            align-items: center;
+            &.checked {
+                background-color: rgb(134, 211, 194) !important;
+                p{
+                    text-decoration: line-through;
+                }
+            }
+            input {
+                accent-color: rgb(3, 35, 30);
+                zoom: 1.4;
+            }
+            button {
+                background-color: rgb(247, 89, 121);
+                border: none;
+                cursor: pointer;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                transition: transform 0.4s ease-in;
+                font-size: 0.8rem;
+                &:hover {
+                    transform: scale(1.4);
+
+                }
+            }
+        }
+        article:nth-child(even) {
+            background-color: rgb(163, 217, 217);
+        
+            
+        }
+    }
+    footer {
+        display: flex;
+        input {
+            border: 1px solid #444;
+            border-color: green;
+            border-radius: 0.4rem 0 0 0.4rem;
+            width: 320px;
+            outline: none;
+            padding: 0.8rem;
+        }
+        button {
+            background-color: rgb(25, 95, 90);
+            border: 1px solid #040505;
+            color: white;
+            border-radius: 0 0.4rem 0.4rem 0;
+            width: 50px;
+            font-size: 1.6rem;
+            transition: transform 0.2 ease-in;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+            
+    }
+    
+}
