@@ -9,7 +9,8 @@ body {
 
 }
 main{
-    background-color: #438a8a;
+
+    background-color: #468787;
     border-radius: 0.8rem;
     padding: 1rem;
     width: 380px;
@@ -113,5 +114,12 @@ main{
         }
             
     }
+    
+}
+
+button{
+    background-color: #cb0808;
+    border: none;
+   
     
 }
