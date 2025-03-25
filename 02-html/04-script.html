@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-scriptjs</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <style>
+        section {
+            h2 {
+                text-align: center;
+            }
+            img {
+                display: flex;
+                margin: 1rem auto;
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body class="html">
+    <nav class="nav">
+        <a href="../index.html"></a>
+    </nav>
+    <main>
+        <header class="header">
+            <h2>04- script JS</h2>
+            <p>inserts JavaScript code.</p>
+        </header>
+        <section class="section">
+            <h2 class="fullname"></h2>
+            <img src="" class="avatar">
+        </section>
+    </main>
+    <script>
+        const fullname = document.querySelector('.fullname')
+        const avatar = document.querySelector('.avatar')
+
+        const fname = prompt ("what´s your full name")
+        if (fname) {
+            fullname.textContent = fname
+            avatar.src = 'https://avatar.iran.liara.run/public'
+        } else {
+            fullname.textContent = 'Guest'
+            avatar.src = 'https://avatar.iran.liara.run/public'
+        }
+    </script>
+</body>
+
+</html>
