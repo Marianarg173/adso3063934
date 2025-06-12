@@ -1,33 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00-Template</title>
-    <link rel="stylesheet" href="../css/master.css">
+    <title>09 - Set get</title>
+    <link rel="shortcut icon" href="favicon.ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/master.css">
+    <style>
+        section {
+            textarea.text-area {
+                width: 100%;
+                min-height: 120px;
+                border-radius: 0.4rem;
+                resize: none;
+            }
+
+            div.actions {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.4rem;
+
+                button {
+                    border: none;
+                    border-radius: 0.4rem;
+                    background-color: #a19d9d;
+                    cursor: pointer;
+                    padding: 0.8rem;
+                    transition: transform 0.4s ease-in;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
+    </style>
 </head>
+
 <body class="jquery">
     <nav class="nav">
         <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
         </a>
-
     </nav>
     <main>
-        <header class="header"> 
-            <h1>09-set-get</h1>
-            <h2>Set or get values and attributes of elements.</h2>
-            
+        <header class="header">
+            <h2>09 - Set | Get</h2>
+            <p>Set or get values and attributes of elements.</p>
         </header>
         <section class="section">
-            <h3>WildCard:</h3>
-            <p class="example">ul>li</p>
-            <h3>Resultado:</h3>
-            
-
+            <textarea class="text-area"></textarea>
+            <div class="actions">
+                <button class="set-html">Set HTML</button>
+                <button class="get-html">Get HTML</button>
+                <button class="set-text">Set Text</button>
+                <button class="get-text">Get TEXT</button>
+                <button class="set-attr">Set Attribute</button>
+                <button class="get-attr">Get Attribute</button>
+                <button class="set-value">Set Value</button>
+                <button class="get-value">Get Value</button>
+            </div>
         </section>
-        
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                //set
+                $('section').on('click', '.set-html', function () {
+                    $('.text-area').html(`<ul>
+                                        <li>Apple</li>
+                                        <li>Pear</li>
+                                        <li>Orange</li>
+                                        </ul>`)
+                })
+                $('section').on('click', '.set-text', function () {
+                    $('.text-area').text('Lorem ipsum dolor sit amet.')
+                })
+                $('section').on('click', '.set-attr', function () {
+                    $('.text-area').attr('rows', '20')
+                })
+                $('section').on('click', '.set-value', function () {
+                    $('.text-area').val('Memento morí')
+                })
+
+
+                //get 
+                $('section').on('click', '.get-html', function () {
+                    alert($('.actions').html())
+                })
+                $('section').on('click', '.get-text', function () {
+                    alert($('.header p').text())
+                })
+                $('section').on('click', '.get-attr', function () {
+                    alert($('.text-area').attr('rows'))
+                })
+                $('section').on('click', '.get-value', function () {
+                    alert($('.text-area').val())
+                })
+            })
+        </script>
     </main>
 </body>
+
 </html>
