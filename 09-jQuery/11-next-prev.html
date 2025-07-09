@@ -1,33 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00-Template</title>
+    <title>11-Next prev</title>
+    <link rel="shortcut icon" href="jquery.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/master.css">
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .controls {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .controls button,
+        .cards button {
+            border: none;
+            border-radius: 0.2rem;
+            background-color: #ffe100;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.75rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .controls button:hover,
+        .cards button:hover {
+            transform: scale(1.05);
+        }
+
+        .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            max-width: 400px;
+            overflow: hidden;
+        }
+
+        .carousel figure {
+            width: 50px;
+            margin: 0;
+            filter: grayscale(1);
+            transition: all 0.5s ease-in;
+            text-align: center;
+        }
+
+        .carousel figure img {
+            width: 100%;
+            max-width: 50px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .carousel figure figcaption {
+            opacity: 0;
+            font-size: 0.7rem;
+        }
+
+        .carousel figure.active {
+            filter: grayscale(0);
+            transform: scale(1.2);
+        }
+
+        .carousel figure.active figcaption {
+            opacity: 1;
+        }
+
+        button img {
+            display: none;
+        }
+    </style>
 </head>
+
 <body class="jquery">
     <nav class="nav">
         <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
         </a>
-
     </nav>
     <main>
-        <header class="header"> 
-            <h1>11-next-prev</h1>
-            <h2> Navigate between sibling elements.</h2>
-            
+        <header class="header">
+            <h1>11 - Next prev</h1>
+            <h2>Navigate between sibling elements.</h2>
         </header>
         <section class="section">
-            <h3>WildCard:</h3>
-            <p class="example">ul>li</p>
-            <h3>Resultado:</h3>
-            
-
+            <div class="controls">
+                <button class="btnFirst">First</button>
+                <button class="btnAutoPlay">Auto Play</button>
+                <button class="btnLast">Last</button>
+            </div>
+            <div class="cards">
+                <button class="btnPrev">←</button>
+                <div class="carousel">
+                    <figure class="active">
+                        <img src="imagenes/nextprev/card01.png">
+                        <figcaption>Goku</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="imagenes/nextprev/card02.png">
+                        <figcaption>Krillin</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="imagenes/nextprev/card03.png">
+                        <figcaption>Piccolo</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="imagenes/nextprev/card04.png">
+                        <figcaption>Trunks</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="imagenes/nextprev/card05.png">
+                        <figcaption>Tenshin</figcaption>
+                    </figure>
+                </div>
+                <button class="btnNext">→</button>
+            </div>
         </section>
-        
     </main>
+
+    <script src="JS/jquery-3.7.1.min.js"></script>
+    <script>
+        let $act;
+        let $autoInt;
+
+        $(document).ready(function () {
+            currentActive();
+
+            $('.btnFirst').click(function () {
+                removeActive();
+                $('figure').first().addClass('active');
+                currentActive();
+            });
+
+            $('.btnLast').click(function () {
+                removeActive();
+                $('figure').last().addClass('active');
+                currentActive();
+            });
+
+            $('.btnNext').click(function () {
+                removeActive();
+                if ($act.next().length) {
+                    $act.next().addClass('active');
+                } else {
+                    $('figure').first().addClass('active');
+                }
+                currentActive();
+            });
+
+            $('.btnPrev').click(function () {
+                removeActive();
+                if ($act.prev().length) {
+                    $act.prev().addClass('active');
+                } else {
+                    $('figure').last().addClass('active');
+                }
+                currentActive();
+            });
+
+            $('.btnAutoPlay').click(function () {
+                $(this).toggleClass('autoplay');
+                if ($(this).hasClass('autoplay')) {
+                    $(this).text('Stop');
+                    $autoInt = setInterval(() => {
+                        $('.btnNext').click();
+                    }, 1000);
+                } else {
+                    $(this).text('Auto Play');
+                    clearInterval($autoInt);
+                }
+            });
+        });
+
+        function currentActive() {
+            $act = $('figure.active');
+        }
+
+        function removeActive() {
+            $('figure').removeClass('active');
+        }
+    </script>
 </body>
+
 </html>

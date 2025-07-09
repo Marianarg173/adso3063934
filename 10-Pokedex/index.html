@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokedex</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    nav.nav {
+      width: 100%;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    nav.nav a svg {
+      width: 30px;
+      height: 30px;
+      fill: #00f7ff;
+      transition: 0.3s ease;
+    }
+
+    nav.nav a svg:hover {
+      fill: #ff00c8;
+    }
+
+    #btnVolverInicio {
+      padding: 8px 14px;
+      border: none;
+      background-color: #00f7ff;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00f7ff;
+      transition: 0.3s ease;
+    }
+
+    #btnVolverInicio:hover {
+      background-color: #008fb3;
+      color: white;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #00f7ff;
+      border-radius: 20px;
+      padding: 20px;
+      width: 95%;
+      max-width: 420px;
+      height: 90vh;
+      box-shadow: 0 0 20px #00f7ff, 0 0 40px #ff00c8;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #00f7ff;
+      font-size: 20px;
+      text-shadow: 0 0 5px #00f7ff;
+    }
+
+    select.pk-generation {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background-color: #111;
+      color: #00f7ff;
+      font-size: 14px;
+      margin-bottom: 1rem;
+      outline: 2px solid #00f7ff;
+    }
+
+    .loader {
+      text-align: center;
+      font-size: 12px;
+      color: #00f7ff;
+      margin: 1rem;
+    }
+
+    ul.pokemons {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      height: 60vh;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    ul.pokemons li {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #ff00c8;
+      padding: 10px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.3s ease;
+    }
+
+    ul.pokemons li:hover {
+      transform: scale(1.05);
+      background-color: rgba(0, 247, 255, 0.15);
+    }
+
+    .col1 {
+      display: flex;
+      flex-direction: column;
+      font-size: 10px;
+      gap: 0.2rem;
+    }
+
+    .col2 img {
+      width: 50px;
+      height: 50px;
+      image-rendering: pixelated;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .front,
+    .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .front {
+      z-index: 2;
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 1rem;
+      color: #00f7ff;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .back button.backlist {
+      background: #ff00c8;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px #ff00c8;
+    }
+
+    .back button.backlist:hover {
+      background: #00f7ff;
+      color: #000;
+    }
+
+    .infoPK img {
+      width: 120px;
+      display: block;
+      margin: 0 auto 1rem;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 0 5px #00f7ff);
+    }
+
+    .infoPK div {
+      margin-bottom: 0.6rem;
+      font-size: 11px;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a href="../index.html" title="Inicio">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <path
+          d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+      </svg>
+    </a>
+   
+  </nav>
+
+  <div class="container">
+    <div class="card" id="card">
+      <div class="front" id="pokemons">
+        <h2>Pokédex</h2>
+        <select class="pk-generation">
+          <option value="">Selecciona una generación...</option>
+        </select>
+        <div class="loader hide">Cargando...</div>
+        <ul class="pokemons"></ul>
+      </div>
+      <div class="back" id="pkinfo">
+        <button class="backlist">← Volver</button>
+        <div class="infoPK"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const pokemons = document.querySelector(".pokemons");
+    const pkGeneration = document.querySelector(".pk-generation");
+    const backlist = document.querySelector(".backlist");
+    const infoPK = document.querySelector(".infoPK");
+    const card = document.querySelector("#card");
+    const loader = document.querySelector(".loader");
+
+    const generations = {
+      range: [
+        { from: 1, to: 151 },
+        { from: 152, to: 251 },
+        { from: 252, to: 386 },
+        { from: 387, to: 493 },
+        { from: 494, to: 649 },
+        { from: 650, to: 721 },
+        { from: 722, to: 809 },
+        { from: 810, to: 890 },
+        { from: 891, to: 1025 },
+      ],
+    };
+
+    const types = {
+      normal: "#a8a77a", fire: "#ee8130", water: "#6390f0", electric: "#f7d02c",
+      grass: "#7ac74c", ice: "#96d9d6", fighting: "#c22e28", poison: "#a33ea1",
+      ground: "#e2bf65", flying: "#a98ff3", psychic: "#f95587", bug: "#a6b91a",
+      rock: "#b6a136", ghost: "#735797", dragon: "#6f35fc", dark: "#705746",
+      steel: "#b7b7ce", fairy: "#d685ad", shadow: "#5a5a5a", unknown: "#68a090"
+    };
+
+    generations.range.forEach((_, index) => {
+      pkGeneration.innerHTML += `<option value="${index}">Generación ${index + 1}</option>`;
+    });
+
+    pkGeneration.addEventListener("change", function () {
+      const { from, to } = generations.range[this.value];
+      loadPokemon(from, to);
+    });
+
+    async function loadPokemon(from, to) {
+      loader.classList.remove("hide");
+      pokemons.classList.add("hide");
+      pokemons.innerHTML = "";
+
+      for (let pk = from; pk <= to; pk++) {
+        try {
+          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pk}`);
+          const data = await res.json();
+          const type = data.types[0].type.name;
+          const typeIcon = `<img src="https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${type}.svg" width="20" />`;
+          pokemons.innerHTML += `
+            <li class="toInfoPK" data-id="${data.id}" style="border-color:${types[type]}">
+              <div class="col1">
+                <strong>${capitalize(data.name)}</strong>
+                ${typeIcon}
+                <small>#${data.id}</small>
+              </div>
+              <div class="col2">
+                <img src="${data.sprites.front_default}" alt="${data.name}" />
+              </div>
+            </li>`;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      loader.classList.add("hide");
+      pokemons.classList.remove("hide");
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    pokemons.addEventListener("click", (e) => {
+      const li = e.target.closest("li.toInfoPK");
+      if (li) {
+        const id = li.dataset.id;
+        card.classList.add("flipped");
+        showPokemonInfo(id);
+      }
+    });
+
+    backlist.addEventListener("click", () => {
+      card.classList.remove("flipped");
+    });
+
+    async function showPokemonInfo(id) {
+      infoPK.innerHTML = "<p>Cargando...</p>";
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      const data = await res.json();
+      const type = data.types[0].type.name;
+      const color = types[type];
+      const stats = data.stats.map((s) => {
+        const percent = Math.min(100, (s.base_stat / 150) * 100).toFixed(0);
+        return `
+          <div>
+            <strong>${s.stat.name}:</strong>
+            <div style="background:#222;width:100%;height:10px;border-radius:4px;overflow:hidden">
+              <div style="width:${percent}%;height:100%;background:${color}"></div>
+            </div>
+          </div>`;
+      });
+
+      const animatedSprite = data.sprites.versions['generation-v']['black-white'].animated.front_default;
+
+      infoPK.innerHTML = `
+        <h2>${capitalize(data.name)} #${data.id}</h2>
+        <img src="${animatedSprite || data.sprites.front_default}" />
+        ${stats.join("")}`;
+    }
+
+    loadPokemon(1, 151);
+  </script>
+</body>
+
+</html>
