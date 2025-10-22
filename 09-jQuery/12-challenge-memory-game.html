@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>11 - Juego de Memoria Stitch</title>
+  <title>Juego de Memoria Stitch</title>
   <link rel="shortcut icon" href="jquery.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="../css/master.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       overflow-x: hidden;
@@ -16,6 +16,7 @@
       align-items: center;
       min-height: 100vh;
       padding: 2rem;
+      font-family: 'Arial', sans-serif;
     }
 
     .header {
@@ -25,23 +26,49 @@
 
     .header h1 {
       color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h2 {
+      color: #388e3c;
+      font-size: 1.2rem;
+      font-weight: normal;
     }
 
     nav.nav {
       width: 100%;
       margin-bottom: 1rem;
+      display: flex;
+      justify-content: flex-start;
     }
 
-    nav.nav a svg {
-      width: 32px;
-      height: 32px;
-      fill: #2e7d32;
-    }
-
-    #temporizador {
-      font-size: 1.5rem;
+    nav.nav a {
       color: #2e7d32;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    nav.nav a:hover {
+      transform: translateX(-5px);
+    }
+
+    .game-info {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      max-width: 600px;
       margin-bottom: 1rem;
+    }
+
+    #temporizador,
+    #puntaje {
+      font-size: 1.2rem;
+      color: #2e7d32;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .tablero {
@@ -51,13 +78,10 @@
       width: 90%;
       max-width: 600px;
       margin-bottom: 1.5rem;
-
-    
       border: 4px solid #2e7d32;
       border-radius: 15px;
       padding: 1rem;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-
       background-image: url('imagenes/fondo.png');
       background-size: cover;
       background-position: center;
@@ -72,6 +96,11 @@
       padding-top: 100%;
       perspective: 1000px;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .carta:hover {
+      transform: scale(1.05);
     }
 
     .carta-inner {
@@ -127,164 +156,210 @@
     }
 
     #btnReiniciar {
-      padding: 0.6rem 1rem;
+      padding: 0.8rem 1.5rem;
       background-color: #43a047;
       color: white;
       border: none;
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     #btnReiniciar:hover {
       background-color: #388e3c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .tablero {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .tablero {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 
-<body class="jquery">
+<body>
   <nav class="nav">
     <a href="index.html" title="Volver al inicio">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-        <path
-          d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-      </svg>
+      <i class="fas fa-arrow-left"></i>
     </a>
   </nav>
 
   <main>
     <header class="header">
-      <h1>12-challenge-memory-game</h1>
-      <h2>Build a memory game using jQuery.</h2>
+      <h1>Juego de Memoria Stitch</h1>
+      <h2>Encuentra todos los pares antes de que se acabe el tiempo</h2>
     </header>
 
-    <div id="temporizador">
-      Tiempo restante: <span id="tiempo">60</span> segundos
+    <div class="game-info">
+      <div id="temporizador">
+        <i class="fas fa-clock"></i> Tiempo: <span id="tiempo">60</span>s
+      </div>
+      <div id="puntaje">
+        <i class="fas fa-star"></i> Aciertos: <span id="aciertos">0</span>/6
+      </div>
     </div>
 
     <div class="tablero" id="tablero"></div>
 
-    <button id="btnReiniciar">🔄 Jugar de nuevo</button>
+    <button id="btnReiniciar">
+      <i class="fas fa-redo"></i> Jugar de nuevo
+    </button>
   </main>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    const imagenesOriginales = [
-      "stitch1.png", "stitch2.png", "stitch3.png",
-      "stitch4.png", "stitch5.png", "stitch6.png"
-    ];
+    $(document).ready(function () {
+      const imagenesOriginales = [
+        "stitch1.png", "stitch2.png", "stitch3.png",
+        "stitch4.png", "stitch5.png", "stitch6.png"
+      ];
 
-    const tablero = document.getElementById("tablero");
-    const btnReiniciar = document.getElementById("btnReiniciar");
-    const tiempoDisplay = document.getElementById("tiempo");
+      const $tablero = $('#tablero');
+      const $btnReiniciar = $('#btnReiniciar');
+      const $tiempoDisplay = $('#tiempo');
+      const $aciertosDisplay = $('#aciertos');
 
-    let primera = null;
-    let segunda = null;
-    let bloqueado = false;
-    let aciertos = 0;
+      let primera = null;
+      let segunda = null;
+      let bloqueado = false;
+      let aciertos = 0;
+      let tiempoRestante = 60;
+      let temporizadorId = null;
 
-    let tiempoRestante = 50; // segundos
-    let temporizadorId = null;
+      function iniciarTemporizador() {
+        tiempoRestante = 60;
+        $tiempoDisplay.text(tiempoRestante);
 
-    function iniciarTemporizador() {
-      tiempoRestante = 50;
-      tiempoDisplay.textContent = tiempoRestante;
+        if (temporizadorId) clearInterval(temporizadorId);
 
-      if (temporizadorId) clearInterval(temporizadorId);
+        temporizadorId = setInterval(() => {
+          tiempoRestante--;
+          $tiempoDisplay.text(tiempoRestante);
 
-      temporizadorId = setInterval(() => {
-        tiempoRestante--;
-        tiempoDisplay.textContent = tiempoRestante;
+          if (tiempoRestante <= 10) {
+            $tiempoDisplay.css('color', '#e53935');
+          }
 
-        if (tiempoRestante <= 0) {
-          clearInterval(temporizadorId);
-          bloquearJuegoPorTiempo();
+          if (tiempoRestante <= 0) {
+            clearInterval(temporizadorId);
+            bloquearJuegoPorTiempo();
+          }
+        }, 1000);
+      }
+
+      function bloquearJuegoPorTiempo() {
+        bloqueado = true;
+        $btnReiniciar.html('<i class="fas fa-hourglass-end"></i> Tiempo agotado! Jugar otra vez');
+        $('body').css('background', 'linear-gradient(to bottom right, #ffcdd2, #ef9a9a)');
+      }
+
+      function reiniciarEstilos() {
+        $tiempoDisplay.css('color', '#2e7d32');
+        $('body').css('background', 'linear-gradient(to bottom right, #e0f7fa, #c8e6c9)');
+      }
+
+      function actualizarPuntaje() {
+        $aciertosDisplay.text(aciertos);
+      }
+
+      function crearCartas() {
+        $tablero.empty();
+        let pares = [...imagenesOriginales, ...imagenesOriginales];
+
+        // Mezclar las cartas usando el algoritmo Fisher-Yates
+        for (let i = pares.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pares[i], pares[j]] = [pares[j], pares[i]];
         }
-      }, 1000);
-    }
 
-    function bloquearJuegoPorTiempo() {
-      bloqueado = true;
-      alert("¡Se acabó el tiempo! Intenta de nuevo.");
-      btnReiniciar.textContent = "🔄 Jugar de nuevo";
-    }
+        pares.forEach(img => {
+          const carta = $('<div>').addClass('carta');
+          const inner = $('<div>').addClass('carta-inner');
+          const frente = $('<div>').addClass('carta-frente');
+          const imagen = $('<img>').attr('src', `imagenes/${img}`);
+          const dorso = $('<div>').addClass('carta-dorso');
 
-    function iniciarJuego() {
-      tablero.innerHTML = "";
-      btnReiniciar.textContent = "🔄 Jugar de nuevo";
-      primera = null;
-      segunda = null;
-      bloqueado = false;
-      aciertos = 0;
+          frente.append(imagen);
+          inner.append(dorso, frente);
+          carta.append(inner);
+          $tablero.append(carta);
 
-      iniciarTemporizador();
+          carta.on('click', function () {
+            if (bloqueado || $(this).hasClass('volteada')) return;
 
-      let pares = [...imagenesOriginales, ...imagenesOriginales];
-      pares = pares.sort(() => 0.5 - Math.random());
+            $(this).addClass('volteada');
 
-      pares.forEach(img => {
-        const carta = document.createElement("div");
-        carta.classList.add("carta");
-
-        const inner = document.createElement("div");
-        inner.classList.add("carta-inner");
-
-        const frente = document.createElement("div");
-        frente.classList.add("carta-frente");
-        const imagen = document.createElement("img");
-        imagen.src = `imagenes/${img}`;
-        frente.appendChild(imagen);
-
-        const dorso = document.createElement("div");
-        dorso.classList.add("carta-dorso");
-        dorso.textContent = "";
-
-        inner.appendChild(dorso);
-        inner.appendChild(frente);
-        carta.appendChild(inner);
-        tablero.appendChild(carta);
-
-        carta.addEventListener("click", () => {
-          if (bloqueado || carta.classList.contains("volteada")) return;
-
-          carta.classList.add("volteada");
-
-          if (!primera) {
-            primera = carta;
-          } else {
-            segunda = carta;
-            bloqueado = true;
-
-            const img1 = primera.querySelector("img").src;
-            const img2 = segunda.querySelector("img").src;
-
-            if (img1 === img2) {
-              aciertos++;
-              primera = null;
-              segunda = null;
-              bloqueado = false;
-
-              if (aciertos === imagenesOriginales.length) {
-                clearInterval(temporizadorId);
-                btnReiniciar.textContent = "🎉 ¡Ganaste! Jugar otra vez 🔄";
-              }
+            if (!primera) {
+              primera = $(this);
             } else {
-              setTimeout(() => {
-                primera.classList.remove("volteada");
-                segunda.classList.remove("volteada");
+              segunda = $(this);
+              bloqueado = true;
+
+              const img1 = primera.find('img').attr('src');
+              const img2 = segunda.find('img').attr('src');
+
+              if (img1 === img2) {
+                aciertos++;
+                actualizarPuntaje();
+
+                // Marcar las cartas como acertadas
+                primera.addClass('acertada');
+                segunda.addClass('acertada');
+
                 primera = null;
                 segunda = null;
                 bloqueado = false;
-              }, 1000);
+
+                if (aciertos === imagenesOriginales.length) {
+                  clearInterval(temporizadorId);
+                  $btnReiniciar.html('<i class="fas fa-trophy"></i> ¡Ganaste! Jugar otra vez');
+                  $('body').css('background', 'linear-gradient(to bottom right, #c8e6c9, #a5d6a7)');
+                }
+              } else {
+                setTimeout(() => {
+                  primera.removeClass('volteada');
+                  segunda.removeClass('volteada');
+                  primera = null;
+                  segunda = null;
+                  bloqueado = false;
+                }, 1000);
+              }
             }
-          }
+          });
         });
-      });
-    }
+      }
 
-    btnReiniciar.addEventListener("click", iniciarJuego);
+      function iniciarJuego() {
+        primera = null;
+        segunda = null;
+        bloqueado = false;
+        aciertos = 0;
+        actualizarPuntaje();
+        reiniciarEstilos();
 
-    iniciarJuego();
+        iniciarTemporizador();
+        crearCartas();
+
+        $btnReiniciar.html('<i class="fas fa-redo"></i> Jugar de nuevo');
+      }
+
+      $btnReiniciar.on('click', iniciarJuego);
+
+      // Iniciar el juego al cargar la página
+      iniciarJuego();
+    });
   </script>
 </body>
 
