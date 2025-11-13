@@ -26,9 +26,9 @@
                     {{-- Email --}}
                     <div class="text-left">
                         <label class="label text-gray-700 font-medium">Email</label>
-                        <input type="text"
+                        <input type="email" name="email"
                             class="input input-bordered w-full rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                            placeholder="Email" value="{{ old('email') }}" />
+                            placeholder="email@example.com" value="{{ old('email') }}" required />
                         @error('email')
                         <small class="badge badge-error mt-1">{{ $message }}</small>
                         @enderror
@@ -37,16 +37,17 @@
                     {{-- Password --}}
                     <div class="text-left">
                         <label class="label text-gray-700 font-medium">Password</label>
-                        <input type="password"
+                        <input type="password" name="password"
                             class="input input-bordered w-full rounded-xl focus:ring-2 focus:ring-amber-400 focus:border-amber-400"
-                            placeholder="Password" />
+                            placeholder="Password" required />
                         @error('password')
                         <small class="badge badge-error mt-1">{{ $message }}</small>
                         @enderror
                     </div>
 
                     {{-- Botón --}}
-                    <button class="btn btn-outline btn-info mt-4 w-full font-semibold rounded-xl shadow-md">
+                    <button type="submit"
+                        class="btn btn-outline btn-info mt-4 w-full font-semibold rounded-xl shadow-md hover:bg-amber-500 hover:text-white transition-all duration-200">
                         Login
                     </button>
 

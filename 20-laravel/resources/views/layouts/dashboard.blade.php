@@ -9,10 +9,22 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+@php
+if(Auth::user()->role = 'Administrator'){
+$image = 'photos/bg-admin.png';
+
+}else {
+$image = 'photos/bg-customer.png';
+
+}
+
+@endphp
 
 <body
-    class="min-h-[100dvh] bg-[url({{ asset('photos/bg-welcome.png') }})] bg-center bg-cover w-full flex flex-col gap-4 items-center justify-center p-8">
+    class="min-h-[100dvh] bg-[url({{ asset('photos/bg-admin.png') }})] bg-center bg-cover bg-fixed w-full flex flex-col gap-4 items-center justify-center p-8 pt-20" >
+    @include('layouts.navbar')
     @yield('content')
+    @yield('js')
 
 </body>
 
