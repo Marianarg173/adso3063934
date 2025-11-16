@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         $user->phone = '3000000001';
         $user->email = 'john.wick@example.com';
         $user->password = bcrypt('admin');
-        $user->role = 'administrator';
+        $user->role = 'Administrator';
         $user->save();
 
         // Insert -> Array
