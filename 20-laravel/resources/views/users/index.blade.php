@@ -124,7 +124,7 @@
                         </svg>
                     </a>
 
-                    <a href="{{ url('user/'.$user->id.'/edit') }}" class="text-[#5EC9A5] hover:text-[#2E6F56]">
+                    <a href="{{ url('users/'.$user->id.'/edit') }}" class="text-[#5EC9A5] hover:text-[#2E6F56]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor"
                             viewBox="0 0 256 256">
                             <path
@@ -133,7 +133,8 @@
                         </svg>
                     </a>
 
-                    <a href="javascript:;" class="text-red-400 hover:text-red-600">
+                    <a href="javascript:;" data-fullname="{{ $user->fullname }}"
+                        class="text-red-400 hover:text-red-600 btn_delete">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor"
                             viewBox="0 0 256 256">
                             <path
@@ -141,13 +142,15 @@
                             </path>
                         </svg>
                     </a>
-
+                    <form class="hidden" method="POST" action="{{ url('users/'.$user->id) }}">
+                        @csrf
+                        @method('delete')
+                    </form>
                 </td>
-
             </tr>
             @endforeach
-
             <tr>
+
                 <td colspan="7">
                     {{ $users->links('layouts.pagination') }}
                 </td>
@@ -177,18 +180,55 @@
         <button>close</button>
     </form>
 </dialog>
+
+<dialog id="modal_delete" class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Are you sure?</h3>
+
+        <div role="alert" class="alert alert-error alert-soft mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>You want to delete: <strong class="fullname"></strong></span>
+        </div>
+
+        <div class="flex gap-2 mt-6 justify-end">
+            <form method="dialog">
+                <button method="dialog" class="btn btn-error btn-outline btn-sm">Cancel</button>
+            </form>
+            <button type="button" class="btn btn-success btn-outline btn-sm btn_confirm">Confirm</button>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
 @endsection
 
 @section('js')
 
 <script>
     $(document).ready(function (){
+        // Modal
         const modal_message = document.getElementById('modal_message')
             @if(session('message'))
             modal_message.showModal()
         @endif
+
+        // Delete User
+        $('table').on('click', '.btn_delete', function() {
+            $fullname = $(this).data('fullname');
+            $('.fullname').text($fullname);
+            $frm = $(this).next();
+            modal_delete.showModal();
+        })
+        $('.btn_confirm').on('click', function(e){
+            e.preventDefault();
+            $frm.submit();
+        })
     })
 </script>
 @endsection
-
-

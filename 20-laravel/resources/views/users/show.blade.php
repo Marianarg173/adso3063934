@@ -72,15 +72,25 @@
 
             <li><span class="text-[#fff9] font-bold">Gender:</span> {{ $user->gender }}</li>
 
-            <li><span class="text-[#fff9] font-bold">Birthdate:</span> {{ $user->birthdate }}</li>
+            <li>
+                <span class="text-[#fff9] font-bold">Age:</span>
+                {{ \Carbon\Carbon::parse($user->birthdate)->age }} años
+            </li>
+
 
             <li><span class="text-[#fff9] font-bold">Phone:</span> {{ $user->phone }}</li>
 
             <li><span class="text-[#fff9] font-bold">Email:</span> {{ $user->email }}</li>
 
-            <li><span class="text-[#fff9] font-bold">Active:</span> {{ $user->active }}</li>
+            <li>
+                <span class="text-[#fff9] font-bold">Active:</span>
+                {!! $user->active
+                ? '<span class="text-green-400 font-bold">Activated</span>'
+                : '<span class="text-red-400 font-bold">Inactive</span>' !!}
+            </li>
 
-            <li><span class="text-[#fff9] font-bold">Rol:</span> {{ $user->rol }}</li>
+
+            <li><span class="text-[#fff9] font-bold">Role:</span> {{ $user->role }}</li>
 
             <li><span class="text-[#fff9] font-bold">Created at:</span> {{ $user->created_at }}</li>
 
