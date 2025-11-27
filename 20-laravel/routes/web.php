@@ -74,6 +74,13 @@ Route::middleware('auth')->group(function () {
         $pet = App\Models\Pet::find(request()->id);
         return view('view-pet')->with('pet', $pet);
     });
+    //Search 
+    Route::post('search/users', [UserController::class, 'search']);
+    
+
+    Route::get('export/users/pdf', [UserController::class, 'pdf']);
+    Route::get('export/users/excel', [UserController::class, 'excel']);
+    
 });
 
 require __DIR__ . '/auth.php';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -121,4 +122,24 @@ class UserController extends Controller
             );
         }
     }
+    // search by scope
+    public function search(Request $request){
+        $users =  User::name($request->q)->paginate(20);    
+        return view('users.search')->with('users', $users);
+
+    }
+    // Export PDF
+    public function pdf(){
+        $users = User::all();
+        $pdf = PDF::loadView('users.pdf' , compact('users'));
+        return $pdf->download('allusers.pdf');
+        
+        
+    }
+    //Export EXCEL
+    public function excel(){
+        return 'EXCEL';
+    }
+
+
 }

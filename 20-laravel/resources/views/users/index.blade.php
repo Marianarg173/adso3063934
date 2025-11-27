@@ -54,7 +54,7 @@
             <path d="m21 21-4.3-4.3"></path>
         </g>
     </svg>
-    <input type="search" placeholder="Search..." name="qsearch" class="text-gray-700 w-full" />
+    <input id="qsearch" type="search" placeholder="Search..." name="qsearch" class="text-gray-700 w-full" />
 </label>
 
 {{-- Tabla --}}
@@ -73,7 +73,7 @@
             </tr>
         </thead>
 
-        <tbody class="text-gray-700 text-sm md:text-base">
+        <tbody class="text-gray-700 text-sm md:text-base datalist">
 
             @foreach($users as $user)
             <tr class="border-b border-[#A8F1D080] hover:bg-[#A8F1D040] transition">
@@ -212,6 +212,7 @@
 
 <script>
     $(document).ready(function (){
+
         // Modal
         const modal_message = document.getElementById('modal_message')
             @if(session('message'))
@@ -229,6 +230,48 @@
             e.preventDefault();
             $frm.submit();
         })
+        // Search ---------------------------
+            function debounce(func, wait) {
+                let timeout
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout)
+                        func(...args)
+                    };
+                    clearTimeout(timeout)
+                    timeout = setTimeout(later, wait)
+                }
+            }
+            const search = debounce(function(query) {
+                
+                $token = $('input[name=_token]').val()
+                
+                $.post("search/users", {'q': query, '_token': $token},
+                    function (data) {
+                        $('.datalist').html(data).hide().fadeIn(1000)
+                    }
+                )
+            }, 500)
+            $('body').on('input', '#qsearch', function(event) {
+                event.preventDefault()
+                const query = $(this).val()
+                
+                $('.datalist').html(`<tr>
+                                        <td colspan="7" class="text-center py-18">
+                                            <span class="loading loading-spinner loading-xl"></span>
+                                        </td>
+                                    </tr>`)
+                
+                if(query != ''){
+                    search(query)
+                }else{
+                    setTimeout(() => {
+                         window.location.replace('users')
+                    }, 500);   
+                   
+                }
+                
+            })
     })
 </script>
 @endsection
