@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 
 class UserController extends Controller
 {
@@ -117,29 +120,36 @@ class UserController extends Controller
         }
 
         if ($user->delete()) {
-            return redirect('users')->with('message',
+            return redirect('users')->with(
+                'message',
                 'The user: ' . $user->fullname . ' was successfully deleted!'
             );
         }
     }
     // search by scope
-    public function search(Request $request){
-        $users =  User::name($request->q)->paginate(20);    
+    public function search(Request $request)
+    {
+        $users =  User::name($request->q)->paginate(20);
         return view('users.search')->with('users', $users);
-
     }
     // Export PDF
-    public function pdf(){
+    public function pdf()
+    {
         $users = User::all();
-        $pdf = PDF::loadView('users.pdf' , compact('users'));
+        $pdf = PDF::loadView('users.pdf', compact('users'));
         return $pdf->download('allusers.pdf');
-        
-        
     }
     //Export EXCEL
-    public function excel(){
-        return 'EXCEL';
+    public function excel()
+    {
+        return Excel::download(new UsersExport, 'allusers.xlsx');
     }
 
-
+    // EXCEL IMPORT
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        Excel::import(new UsersImport, $file);
+        return redirect()->back()->with('message', 'Users imported successful!');
+    }
 }
