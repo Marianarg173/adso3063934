@@ -167,7 +167,7 @@
     {{-- --}}
     <div class="card text-black bg[#0006] w-96 shadow-sm">
         <figure>
-            <img src="{{ asset('photos/adop.png') }}" alt="Users" />
+            <img src="{{ asset('photos/adop.png') }}" alt="Adoptions" />
         </figure>
 
         <div class="card-body">
@@ -228,7 +228,7 @@
             </ul>
             <div class="card-actions justify-end">
                 <a class="btn btn-outline hover:bg-[#fff6] hover:backdrop-blur-sm hover:text-black mt-3"
-                    href="{{ url('users') }}">
+                    href="{{ url('adoptions') }}">
                     Enter
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="black" viewBox="0 0 256 256">
                         <path
