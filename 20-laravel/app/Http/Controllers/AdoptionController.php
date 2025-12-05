@@ -8,20 +8,58 @@ use Illuminate\Http\Request;
 class AdoptionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Mostrar listado de adopciones con búsqueda.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $adoptions = Adoption::orderBy('id', 'DESC')->paginate(20);
-        return view('adoptions.index', compact('adoptions'));
+        $search = $request->input('q'); // búsqueda desde input AJAX
+
+        $adoptions = Adoption::with(['user', 'pet'])
+            ->when($search, function ($query, $search) {
+                $query->where('id', 'LIKE', "%{$search}%") // buscar por ID de adopción
+                    ->orWhereHas('pet', function ($q) use ($search) { // buscar por nombre de mascota
+                        $q->where('name', 'LIKE', "%{$search}%");
+                    })
+                    ->orWhereHas('user', function ($q) use ($search) { // buscar por nombre de usuario
+                        $q->where('fullname', 'LIKE', "%{$search}%");
+                    });
+            })
+            ->orderBy('id', 'DESC')
+            ->paginate(20)
+            ->withQueryString(); // mantiene la query en la paginación
+
+        return view('adoptions.index', compact('adoptions', 'search'));
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar detalle de una adopción.
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $adoption = Adoption::find($request->id);
-        return view('adoptions.show')->with('adoption', $adoption);
+        $adoption = Adoption::with(['user', 'pet'])->findOrFail($id);
+        return view('adoptions.show', compact('adoption'));
     }
+
+    /**
+     * Búsqueda AJAX para la vista index.
+     */
+    public function search(Request $request)
+{
+    $query = $request->q;
+
+    $adoptions = Adoption::with(['user', 'pet'])
+        ->when($query, function ($q) use ($query) {
+            $q->where('id', 'LIKE', "%{$query}%") // Buscar por ID
+              ->orWhereHas('pet', function($q2) use ($query){
+                  $q2->where('name', 'LIKE', "%{$query}%"); // Buscar por nombre de mascota
+              })
+              ->orWhereHas('user', function($q3) use ($query){
+                  $q3->where('fullname', 'LIKE', "%{$query}%"); // Buscar por nombre de usuario
+              });
+        })
+        ->orderBy('id', 'DESC')
+        ->get();
+
+    return response()->json($adoptions);
 }
+    }
