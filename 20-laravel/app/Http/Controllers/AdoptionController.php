@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Adoption;
 use Illuminate\Http\Request;
+use App\Exports\AdoptionsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdoptionController extends Controller
 {
@@ -44,22 +47,40 @@ class AdoptionController extends Controller
      * Búsqueda AJAX para la vista index.
      */
     public function search(Request $request)
-{
-    $query = $request->q;
+    {
+        $query = $request->q;
 
-    $adoptions = Adoption::with(['user', 'pet'])
-        ->when($query, function ($q) use ($query) {
-            $q->where('id', 'LIKE', "%{$query}%") // Buscar por ID
-              ->orWhereHas('pet', function($q2) use ($query){
-                  $q2->where('name', 'LIKE', "%{$query}%"); // Buscar por nombre de mascota
-              })
-              ->orWhereHas('user', function($q3) use ($query){
-                  $q3->where('fullname', 'LIKE', "%{$query}%"); // Buscar por nombre de usuario
-              });
-        })
-        ->orderBy('id', 'DESC')
-        ->get();
+        $adoptions = Adoption::with(['user', 'pet'])
+            ->when($query, function ($q) use ($query) {
+                $q->where('id', 'LIKE', "%{$query}%") // Buscar por ID
+                    ->orWhereHas('pet', function ($q2) use ($query) {
+                        $q2->where('name', 'LIKE', "%{$query}%"); // Buscar por nombre de mascota
+                    })
+                    ->orWhereHas('user', function ($q3) use ($query) {
+                        $q3->where('fullname', 'LIKE', "%{$query}%"); // Buscar por nombre de usuario
+                    });
+            })
+            ->orderBy('id', 'DESC')
+            ->get();
 
-    return response()->json($adoptions);
-}
+        return response()->json($adoptions);
     }
+
+    /**
+     * Exportar adopciones a Excel.
+     */
+    public function exportExcel()
+    {
+        return Excel::download(new AdoptionsExport, 'adoptions.xlsx');
+    }
+
+    /**
+     * Exportar adopciones a PDF.
+     */
+    public function exportPdf()
+    {
+        $adoptions = Adoption::with(['user', 'pet'])->get();
+        $pdf = PDF::loadView('adoptions.pdf', compact('adoptions'));
+        return $pdf->download('adoptions.pdf');
+    }
+}

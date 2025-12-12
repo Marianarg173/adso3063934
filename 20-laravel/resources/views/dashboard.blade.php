@@ -241,37 +241,131 @@
         </div>
         @endif
     </div>
+    {{-- Customer --}}
+    @if(Auth::user()->role == 'Customer')
+    <div class="flex flex-wrap gap-4 items-center justify-center">
 
-    {{-- MODAL --}}
-    <dialog id="modal_message" class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-lg">Sorry!</h3>
-            <div role="alert" class="alert alert-success mt-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{{ session('error') }}</span>
+        {{-- My Profile --}}
+        <div class="card text-black bg[#0006] w-96 shadow-sm">
+            <figure>
+                <img src="{{ asset('photos/users.png') }}" alt="Users" />
+            </figure>
+
+            <div class="card-body">
+                <h2 class="card-title">My Profile</h2>
+                <div class="card-actions justify-end">
+                    <a class="btn btn-outline hover:bg-[#fff6] hover:backdrop-blur-sm hover:text-black mt-3"
+                        href="{{ url('myprofile') }}">
+                        Enter
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="black" viewBox="0 0 256 256">
+                            <path
+                                d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
+        {{-- My Adoptions --}}
+        <div class="card text-black bg[#0006] w-96 shadow-sm">
+            <figure>
+                <img src="{{ asset('photos/pets.png') }}" alt="Users" />
+            </figure>
 
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
-    </dialog>
+            <div class="card-body">
+                <h2 class="card-title">My Adoptions</h2>
+                <div class="card-actions justify-end">
+                    <a class="btn btn-outline hover:bg-[#fff6] hover:backdrop-blur-sm hover:text-black mt-3"
+                        href="{{ url('myadoptions') }}">
+                        Enter
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="black" viewBox="0 0 256 256">
+                            <path
+                                d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{-- --}}
+        <div class="card text-black bg[#0006] w-96 shadow-sm">
+            <figure>
+                <img src="{{ asset('photos/adop.png') }}" alt="Adoptions" />
+            </figure>
 
-    @endsection
+            <div class="card-body">
+                <h2 class="card-title">Make Adoptions</h2>
+                <div class="card-actions justify-end">
+                    <a class="btn btn-outline hover:bg-[#fff6] hover:backdrop-blur-sm hover:text-black mt-3"
+                        href="{{ url('makeadoption') }}">
+                        Enter
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="black" viewBox="0 0 256 256">
+                            <path
+                                d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            @endif
+        </div>
 
-    @section ('js')
-    <script>
-        $(document).ready(function () {
+        {{-- Modals --}}
+
+        <dialog id="modal_message" class="modal">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg">Congratulations!</h3>
+
+                <div role="alert" class="alert alert-success mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{{ session('message') }}</span>
+                </div>
+            </div>
+
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+        <dialog id="modal_error" class="modal">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg">Sorry!</h3>
+
+                <div role="alert" class="alert alert-error mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{{ session('error') }}</span>
+                </div>
+            </div>
+
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+        @endsection
+
+        @section ('js')
+        <script>
+            $(document).ready(function () {
             // modal
+            const modal_error = document.getElementById('modal_error');
+            @if(session('error'))
+                modal_error.showModal();
+            @endif
+        
            const modal_message = document.getElementById('modal_message');
-           @if (session('error'))
+           @if (session('message'))
                modal_message.showModal();
            @endif
-        });
-    </script>
 
-    @endsection
+        });
+        </script>
+
+        @endsection

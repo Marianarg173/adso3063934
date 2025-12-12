@@ -39,7 +39,7 @@
                 </li>
 
                 {{-- ADMIN --}}
-                @if (Auth::user()->role == 'Adminitrator')
+                @if (Auth::user()->role == 'Administrator')
                 <li>
                     <a href="{{ url('users/') }}" class="flex items-center gap-2 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
@@ -90,7 +90,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('makeadoptions/') }}" class="flex items-center gap-2 hover:text-black">
+                    <a href="{{ url('makeadoption/') }}" class="flex items-center gap-2 hover:text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                             viewBox="0 0 256 256">
                             <path
