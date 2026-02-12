@@ -78,51 +78,37 @@ class PetController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        try {
-            $request->validate([
-                'name'        => ['sometimes', 'required', 'string'],
-                'kind'        => ['sometimes', 'required', 'string'],
-                'weight'      => ['sometimes', 'decimal:1,1'],
-                'age'         => ['sometimes', 'integer'],
-                'breed'       => ['sometimes', 'string'],
-                'location'    => ['sometimes', 'string'],
-                'description' => ['sometimes', 'string'],
-            ]);
+        // 1. Buscamos la mascota por el ID de la URL
+        $pet = Pet::find($id);
 
-            $pet = Pet::find($id);
-
-            if (!$pet) {
-                return response()->json([
-                    'error' => 'Pet not found 🐾'
-                ], 404);
-            }
-
-            $pet->update($request->all());
-
-            return response()->json([
-                'message' => 'Pet updated successfully!',
-                'pet' => $pet
-            ], 200);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'message' => 'Error in the request',
-                'errors' => $e->errors()
-            ], 400);
+        // 2. Si no existe, avisamos
+        if (!$pet) {
+            return response()->json(['error' => 'Pet not found 🐾'], 404);
         }
-    }
 
+        // 3. Validamos los datos (usamos 'sometimes' para que no sea obligatorio enviar todo)
+        $request->validate([
+            'name'        => ['sometimes', 'string'],
+            'kind'        => ['sometimes', 'string'],
+            'weight'      => ['sometimes', 'numeric'],
+            'age'         => ['sometimes', 'integer'],
+            'breed'       => ['sometimes', 'string'],
+            'location'    => ['sometimes', 'string'],
+            'description' => ['sometimes', 'string'],
+        ]);
+
+        // 4. Actualizamos solo los campos que enviaste
+        $pet->update($request->all());
+
+        return response()->json([
+            'message' => 'Pet updated successfully! ✨',
+            'pet' => $pet
+        ], 200);
+    }
     /**
      * Remove the specified resource from storage.
      */
@@ -138,7 +124,7 @@ class PetController extends Controller
             }
         } else {
             return response()->json([
-                'error' => 'Pet not found! '
+                'error' => 'Pet not found 🐾'
             ], 404);
         }
     }

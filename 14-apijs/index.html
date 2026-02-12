@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>API JS: Larapets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/master.css">
+</head>
+
+<body>
+
+    <!-- ================= LOGIN ================= -->
+    <main id="login" >
+        <header>
+            <img src="imgs/title-login.png" alt="Login">
+        </header>
+
+        <form>
+            <label>
+                Email:
+                <input type="email" name="email" placeholder="example@mail.com">
+            </label>
+
+            <label>
+                Password:
+                <input type="password" name="password" placeholder="Your Secret Password">
+            </label>
+
+            <button type="button" class="btnLogin">Login</button>
+        </form>
+    </main>
+
+
+    <!-- ================= DASHBOARD ================= -->
+    <main id="dashboard" >
+
+        <!-- Header -->
+        <header>
+            <img src="imgs/title-dashboard.png" alt="Dashboard">
+        </header>
+
+        <!-- Botones superiores -->
+        <nav class="top-actions">
+            <a href="#" class="btnAdd">
+                <img src="imgs/btn-add.png" alt="Add">
+
+            </a>
+
+            <a href="#" class="btnLogout">
+                <img src="imgs/btn-logout.png" alt="Logout">
+
+            </a>
+        </nav>
+
+        <h2>Pet List</h2>
+
+        <!-- Lista -->
+        <section class="list">
+
+            <div class="row">
+                <img src="imgs/pet01.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: Golden</h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="#" class="btnShow"></a>
+                    <a href="#" class="btnEdit"></a>
+                    <a href="#" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet02.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Tommy</h3>
+                    <h4>Cat: Criollo </h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="#" class="btnShow"></a>
+                    <a href="#" class="btnEdit"></a>
+                    <a href="#" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet01.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: Golden</h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="#" class="btnShow"></a>
+                    <a href="#" class="btnEdit"></a>
+                    <a href="#" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet02.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Tommy</h3>
+                    <h4>Cat: Criollo </h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="#" class="btnShow"></a>
+                    <a href="#" class="btnEdit"></a>
+                    <a href="#" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet01.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: Golden</h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="#" class="btnShow"></a>
+                    <a href="#" class="btnEdit"></a>
+                    <a href="#" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet02.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Tommy</h3>
+                    <h4>Cat: Criollo </h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="#" class="btnShow"></a>
+                    <a href="#" class="btnEdit"></a>
+                    <a href="#" class="btnDelete"></a>
+                </nav>
+            </div>
+
+        </section>
+    </main>
+    <!-- ================= VIEW ADD ================= -->
+    <main id="add">
+        <header>
+            <a href="">
+                <img src="imgs/btn-back.svg" alt="back">
+            </a>
+            <img src="imgs/title-add.svg" alt="add">
+        </header>
+        <form action="">
+            <label for="name">
+                Name
+                <input type="text" name="name" placeholder="Enter name">
+            </label>
+            <label for="kind">
+                Kind
+                <input type="text" name="kind" placeholder="Enter kind">
+            </label>
+            <label for="weight">
+                Weight
+                <input type="text" name="weight" placeholder="Enter weight">
+            </label>
+            <label for="age">
+                Age
+                <input type="text" name="age" placeholder="Enter age">
+            </label>
+            <label for="bread">
+                Bread
+                <input type="text" name="bread" placeholder="Enter bread">
+            </label>
+            <label for="location">
+                Location
+                <input type="text" name="location" placeholder="Enter location">
+            </label>
+            <label for="description">
+                Description
+                <textarea name="description" placeholder="Feed only meat"></textarea>
+            </label>
+            <div class="actions">
+                <button>Add</button>
+                <a href="" class="btnCancel">Cancel</a>
+            </div>
+        </form>
+    </main>
+    </main>
+    <main id="show" >
+        <header>
+            <a href="">
+                <img src="imgs/btn-back.svg" alt="back">
+            </a>
+            <img src="imgs/title-show.svg" alt="show">
+        </header>
+
+        <section class="show-pet">
+            <div class="photo">
+                <img src="imgs/btn-cow.svg" alt="Pet Photo">
+            </div>
+
+            <div class="info">
+                <p><strong>Name:</strong> <span>Lola</span></p>
+                <p><strong>Kind:</strong> <span>Cow</span></p>
+                <p><strong>Weight:</strong> <span>50 lbs</span></p>
+                <p><strong>Age:</strong> <span>7 years</span></p>
+                <p><strong>Breed:</strong> <span>Normando</span></p>
+                <p><strong>Location:</strong> <span>Manizales</span></p>
+
+                <div class="description-box">
+                    <strong>Description:</strong>
+                    <p>Playful and gives a lot of milk</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- ================= VIEW EDIT ================= -->
+    <main id="edit" >
+        <header>
+            <a href="">
+                <img src="imgs/btn-back.svg" alt="back">
+            </a>
+            <img src="imgs/title-edit.svg" alt="edit">
+        </header>
+        <form action="">
+            <label for="name">
+                Name
+                <input type="text" name="name" placeholder="Enter name">
+            </label>
+            <label for="kind">
+                Kind
+                <input type="text" name="kind" placeholder="Enter kind">
+            </label>
+            <label for="weight">
+                Weight
+                <input type="text" name="weight" placeholder="Enter weight">
+            </label>
+            <label for="age">
+                Age
+                <input type="text" name="age" placeholder="Enter age">
+            </label>
+            <label for="bread">
+                Bread
+                <input type="text" name="bread" placeholder="Enter bread">
+            </label>
+            <label for="location">
+                Location
+                <input type="text" name="location" placeholder="Enter location">
+            </label>
+            <label for="description">
+                Description
+                <textarea name="description" placeholder="Feed only meat"></textarea>
+            </label>
+            <div class="actions">
+                <button>Edit</button>
+                <a href="" class="btnCancel">Cancel</a>
+            </div>
+        </form>
+
+
+        <script src="js/app.js"></script>
+
+</body>
+
+</html>
