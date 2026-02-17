@@ -7,49 +7,47 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     /**
      * Maneja el inicio de sesión y genera el token.
      */
-    public function login(Request $request): JsonResponse
+    public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => ['required','email'],
+            'password' => ['required']
         ]);
 
-        // Buscamos al usuario
-        $user = User::where('email', $request->email)->first();
-
-        // Validamos credenciales
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Credenciales inválidas'], 401);
+        if (!Auth::attempt($request->only('email','password'))) {
+            return response()->json([
+                'message' => 'Credenciales incorrectas'
+            ], 401);
         }
 
-        /** @var \App\Models\User $user */
-        // La línea de arriba quita el error rojo en 'createToken'
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $user = Auth::user();
+
+        // CREAR TOKEN
+        $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
+            'message' => 'Login exitoso',
+            'token' => $token,
+            'user' => $user
+        ], 200);
+
+        
     }
 
-    /**
-     * Cierra la sesión eliminando el token.
-     */ public function logout(Request $request): JsonResponse
+    // LOGOUT
+    public function logout(Request $request)
     {
-        /** @var \App\Models\User $user */
-        $user = $request->user();
+        $request->user()->tokens()->delete();
 
-        if ($user && $user->currentAccessToken()) {
-            // Usamos un método más directo que el editor siempre reconoce
-            $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
-        }
-
-        return response()->json(['message' => 'Sesión cerrada']);
+        return response()->json([
+            'message' => 'Logout exitoso'
+        ], 200);
     }
 }

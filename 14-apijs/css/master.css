@@ -47,7 +47,8 @@ header {
 }
 
 /* Botón volver genérico para headers */
-header a.btn-back, header a:has(img[alt="back"]) {
+header a.btn-back,
+header a:has(img[alt="back"]) {
     position: absolute;
     left: 0.6rem;
     display: flex;
@@ -62,7 +63,8 @@ header a.btn-back, header a:has(img[alt="back"]) {
 
 #login form {
     position: absolute;
-    top: 5rem; /* Posicionado en la parte superior */
+    top: 5rem;
+    /* Posicionado en la parte superior */
     width: 100%;
     padding: 0 1.4rem;
     display: flex;
@@ -106,7 +108,9 @@ header a.btn-back, header a:has(img[alt="back"]) {
     align-items: center;
 }
 
-#dashboard .top-actions a.btnAdd { background-color: #7AB2B2; }
+#dashboard .top-actions a.btnAdd {
+    background-color: #7AB2B2;
+}
 
 /* Lista Dashboard */
 .list {
@@ -129,12 +133,25 @@ header a.btn-back, header a:has(img[alt="back"]) {
     flex-shrink: 0;
 }
 
-.row:nth-child(even) { background-color: #7AB2B2; }
+.row:nth-child(even) {
+    background-color: #7AB2B2;
+}
 
-.row img { width: 30px; margin-right: 8px; }
+.row img {
+    width: 30px;
+    margin-right: 8px;
+}
 
-.row .data h3 { font-size: 11px; margin: 0; }
-.row .data h4 { font-size: 9px; margin: 0; font-weight: 400; }
+.row .data h3 {
+    font-size: 11px;
+    margin: 0;
+}
+
+.row .data h4 {
+    font-size: 9px;
+    margin: 0;
+    font-weight: 400;
+}
 
 .row .actions {
     margin-left: auto;
@@ -148,9 +165,17 @@ header a.btn-back, header a:has(img[alt="back"]) {
     background-size: contain !important;
 }
 
-.btnShow { background: url(../imgs/btn-show.png) no-repeat center; }
-.btnEdit { background: url(../imgs/btn-edit.png) no-repeat center; }
-.btnDelete { background: url(../imgs/btn-delete.png) no-repeat center; }
+.btnShow {
+    background: url(../imgs/btn-show.png) no-repeat center;
+}
+
+.btnEdit {
+    background: url(../imgs/btn-edit.png) no-repeat center;
+}
+
+.btnDelete {
+    background: url(../imgs/btn-delete.png) no-repeat center;
+}
 
 /* Formularios (Add / Edit) ----------------------- */
 form {
@@ -167,7 +192,8 @@ form label {
     flex-direction: column;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     border: 1px solid #09637E;
     border-radius: 5px;
     padding: 0.3rem;
@@ -175,7 +201,10 @@ form input, form textarea {
     width: 100%;
 }
 
-form textarea { height: 45px; resize: none; }
+form textarea {
+    height: 45px;
+    resize: none;
+}
 
 /* Botones de acción inferiores */
 .actions {
@@ -185,7 +214,8 @@ form textarea { height: 45px; resize: none; }
     margin-top: 0.5rem;
 }
 
-.actions button, .actions a.btnCancel {
+.actions button,
+.actions a.btnCancel {
     all: unset;
     width: 100px;
     height: 30px;
@@ -217,7 +247,9 @@ form textarea { height: 45px; resize: none; }
     object-fit: cover;
 }
 
-#show .info { width: 100%; }
+#show .info {
+    width: 100%;
+}
 
 #show .info p {
     display: flex;
@@ -233,4 +265,17 @@ form textarea { height: 45px; resize: none; }
     padding: 0.5rem;
     border-radius: 5px;
     font-size: 0.75rem;
+}
+
+
+main.animateView {
+    animation: animateView 0.4s ease-in 1;
+}
+
+@keyframes animateView {
+    0% {
+        opacity: 0;
+        transform: scale(.6);
+
+    }
 }

@@ -6,7 +6,6 @@
     <title>API JS: Larapets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/master.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -17,18 +16,18 @@
             <img src="imgs/title-login.png" alt="Login">
         </header>
 
-        <form id="loginForm">
+        <form>
             <label>
                 Email:
-                <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                <input type="email" name="email" placeholder="example@mail.com">
             </label>
 
             <label>
                 Password:
-                <input type="password" id="password" name="password" placeholder="Your Secret Password" required>
+                <input type="password" name="password" placeholder="Your Secret Password">
             </label>
 
-            <button class="btnLogin">Login</button>
+            <button type="button" class="btnLogin">Login</button>
         </form>
     </main>
 
@@ -57,9 +56,92 @@
         <h2>Pet List</h2>
 
         <!-- Lista -->
-        <section class="list" id="petList">
+        <section class="list">
 
-            
+            <div class="row">
+                <img src="imgs/pet01.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: Golden</h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="javascript:;" class="btnShow"></a>
+                    <a href="javascript:;" class="btnEdit"></a>
+                    <a href="javascript:;" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet02.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Tommy</h3>
+                    <h4>Cat: Criollo </h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="javascript:;" class="btnShow"></a>
+                    <a href="javascript:;" class="btnEdit"></a>
+                    <a href="javascript:;" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet01.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: Golden</h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="javascript:;" class="btnShow"></a>
+                    <a href="javascript:;" class="btnEdit"></a>
+                    <a href="javascript:;" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet02.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Tommy</h3>
+                    <h4>Cat: Criollo </h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="javascript:;" class="btnShow"></a>
+                    <a href="javascript:;" class="btnEdit"></a>
+                    <a href="javascript:;" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet01.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Firulais</h3>
+                    <h4>Dog: Golden</h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="javascript:;" class="btnShow"></a>
+                    <a href="javascript:;" class="btnEdit"></a>
+                    <a href="javascript:;" class="btnDelete"></a>
+                </nav>
+            </div>
+            <div class="row">
+                <img src="imgs/pet02.png" alt="Pet01">
+
+                <div class="data">
+                    <h3>Tommy</h3>
+                    <h4>Cat: Criollo </h4>
+                </div>
+
+                <nav class="actions">
+                    <a href="javascript:;" class="btnShow"></a>
+                    <a href="javascript:;" class="btnEdit"></a>
+                    <a href="javascript:;" class="btnDelete"></a>
+                </nav>
+            </div>
 
         </section>
     </main>
@@ -179,9 +261,9 @@
                 <a href="javascript:;" class="btnCancel">Cancel</a>
             </div>
         </form>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.all.min.js"></script>
-    <script src="js/app.js"></script>
+
+
+        <script src="js/layout.js"></script>
 
 </body>
 
