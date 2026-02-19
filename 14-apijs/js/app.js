@@ -36,11 +36,22 @@ loginForm.addEventListener("submit", async function (e) {
   if (response.ok) {
     localStorage.setItem("authToken", data.token);
     localStorage.setItem("currentView", 1);
-    Swal.fire("Success!", "Login successful", "success");
+    Swal.fire({
+      title: "Success!",
+      text: "Login successful.",
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false
+    });
     showView();
   } else {
-    Swal.fire("Error", data.message, "error");
+    Swal.fire({
+      title: "Login Failed",
+      text: data.message || "Invalid credentials.",
+      icon: "error"
+    });
   }
+
 });
 
 // ================= GET PETS =================
@@ -54,14 +65,14 @@ async function getPets() {
   const data = await response.json();
   if (response.ok) renderPets(data.pets ?? data);
 }
-
 // ================= RENDER PETS =================
 function renderPets(pets) {
   petList.innerHTML = "";
+
   pets.forEach((pet) => {
     petList.innerHTML += `
       <div class="row">
-        <img src="http://127.0.0.1:8000/public/phot/${pet.photos}" alt="pet" />
+       <img src="imgs/${pet.image}" />
         <div class="data">
           <h3>${pet.name}</h3>
           <h4>${pet.kind}</h4>
@@ -76,15 +87,22 @@ function renderPets(pets) {
   });
 }
 
+
 // ================= SHOW PET =================
 async function showPet(id) {
   const token = localStorage.getItem("authToken");
+
   const response = await fetch(`http://127.0.0.1:8000/api/pets/show/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
   const data = await response.json();
   const pet = data.pet ?? data;
 
+  //CAMBIAR IMAGEN
+  document.querySelector("#show .photo img").src = `imgs/${pet.image}`;
+
+  // CAMBIAR INFO
   document.querySelector("#show .info").innerHTML = `
     <p><strong>Name:</strong> ${pet.name}</p>
     <p><strong>Kind:</strong> ${pet.kind}</p>
@@ -92,7 +110,10 @@ async function showPet(id) {
     <p><strong>Age:</strong> ${pet.age}</p>
     <p><strong>Breed:</strong> ${pet.breed}</p>
     <p><strong>Location:</strong> ${pet.location}</p>
-    <p><strong>Description:</strong> ${pet.description}</p>
+    <div class="description-box">
+      <strong>Description:</strong>
+      <p>${pet.description}</p>
+    </div>
   `;
 
   localStorage.setItem("currentView", 3);
@@ -129,7 +150,11 @@ addForm.addEventListener("submit", async function (e) {
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Errores del servidor:", errorData.errors || errorData);
-      Swal.fire("Error", "Revisa los datos del formulario", "error");
+      Swal.fire({
+        title: "Validation Error",
+        text: "Please check the form fields.",
+        icon: "error"
+      });
       return;
     }
 
@@ -140,7 +165,12 @@ addForm.addEventListener("submit", async function (e) {
     showView();
   } catch (error) {
     console.error("Error de conexión:", error);
-    Swal.fire("Error", "No se pudo conectar con el servidor", "error");
+    Swal.fire({
+      title: "Connection Error",
+      text: "Unable to connect to the server.",
+      icon: "error"
+    });
+
   }
 });
 
@@ -194,7 +224,13 @@ editForm.addEventListener("submit", async function (e) {
   });
 
   if (response.ok) {
-    Swal.fire("Updated!", "Pet updated!", "success");
+    Swal.fire({
+      title: "Updated!",
+      text: "Pet updated successfully.",
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false
+    });
     localStorage.setItem("currentView", 1);
     showView();
   }
@@ -203,7 +239,20 @@ editForm.addEventListener("submit", async function (e) {
 // ================= DELETE =================
 async function deletePet(id) {
   const token = localStorage.getItem("authToken");
-  if (!confirm("Delete this pet?")) return;
+
+  const result = await Swal.fire({
+    title: "Delete Pet?",
+    text: "This action cannot be undone.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#088395",
+    confirmButtonText: "Yes, delete it",
+    cancelButtonText: "Cancel",
+    reverseButtons: true
+  });
+
+  if (!result.isConfirmed) return;
 
   const response = await fetch(`http://127.0.0.1:8000/api/pets/delete/${id}`, {
     method: "DELETE",
@@ -214,15 +263,25 @@ async function deletePet(id) {
   });
 
   const data = await response.json();
-  console.log("DELETE RESPONSE:", data);
 
   if (response.ok) {
-    Swal.fire("Deleted!", "Pet removed", "success");
+    Swal.fire({
+      title: "Deleted!",
+      text: "The pet has been removed.",
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false
+    });
     getPets();
   } else {
-    Swal.fire("Error", data.message || "Delete failed", "error");
+    Swal.fire({
+      title: "Error",
+      text: data.message || "Failed to delete pet.",
+      icon: "error"
+    });
   }
 }
+
 
 // ================= NAVIGATION =================
 btnLogout.addEventListener("click", () => {
