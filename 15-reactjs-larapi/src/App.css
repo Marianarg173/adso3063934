@@ -1,0 +1,371 @@
+/* Fonts --------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap');
+
+/* Reset General */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #09637E;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100dvh;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 2rem 0;
+}
+
+/* MAIN ---------------------------- */
+main {
+  background-color: #EBF4F6;
+  border-radius: 10px;
+  position: relative;
+  height: 500px;
+  width: 242px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+}
+
+/* Scroll interno cuando haya mucho contenido */
+main section,
+main form,
+main .list,
+main .show-pet {
+  overflow-y: auto;
+}
+
+/* HEADER ---------------------------- */
+header {
+  background-color: #088395;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  .btnBack {
+    left: 10px;
+    position: absolute;
+
+  }
+
+
+}
+
+/* Botón volver */
+header a.btn-back,
+header a:has(img[alt="back"]) {
+  position: absolute;
+  left: 0.6rem;
+  display: flex;
+}
+
+/* Login ----------------------- */
+#login {
+  background: url(../public/imgs/login.png) no-repeat center;
+  background-size: cover;
+}
+
+#login form {
+  position: absolute;
+  top: 5rem;
+  width: 100%;
+  padding: 0 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+#login button {
+  background-color: #088395;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  width: 100%;
+  height: 35px;
+  cursor: pointer;
+  font-family: 'Poppins';
+  margin-top: 0.5rem;
+  transition: 0.3s ease;
+}
+
+#login button:hover {
+  opacity: 0.9;
+}
+
+/* Dashboard ------------------- */
+#dashboard h2 {
+  font-weight: 400;
+  margin: 0.7rem;
+  font-size: 1.2rem;
+}
+
+#dashboard .top-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  /* SEPARACIÓN DE BOTONES DASHBOARD */
+  padding: 1rem 0.5rem;
+  /* Ajuste para móvil */
+}
+
+#dashboard .top-actions a {
+  background-color: #088395;
+  border-radius: 8px;
+  width: 100px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 0.8rem;
+  transition: 0.3s ease;
+}
+
+#dashboard .top-actions a:hover {
+  transform: translateY(-2px);
+}
+
+#dashboard .top-actions a.btnAdd {
+  background-color: #7AB2B2;
+}
+
+/* Lista Dashboard */
+.list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0 1rem 0;
+}
+
+.row {
+  
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+  width: 220px;
+  height: 45px;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.row:hover {
+  transform: scale(1.02);
+}
+
+.row:nth-child(even) {
+  background-color: #7AB2B2;
+}
+
+.row img {
+  width: 30px;
+  margin-right: 8px;
+}
+
+.row .data h3 {
+  font-size: 11px;
+}
+
+.row .data h4 {
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.row .actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.row .actions a {
+  width: 24px;
+  height: 24px;
+  background-size: contain !important;
+}
+
+/* Botones iconos */
+.btnShow {
+  background: url(../public/imgs/btn-show.png) no-repeat center;
+}
+
+.btnEdit {
+  background: url(../public/imgs/btn-edit.png) no-repeat center;
+}
+
+.btnDelete {
+  background: url(../public/imgs/btn-delete.png) no-repeat center;
+}
+
+/* Formularios ----------------------- */
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0.9rem;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+form label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+form input,
+form textarea {
+  border: 1px solid #09637E;
+  border-radius: 6px;
+  padding: 0.4rem;
+  font-family: 'Poppins';
+  width: 100%;
+  outline: none;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #088395;
+  box-shadow: 0 0 0 2px #08839522;
+}
+
+form textarea {
+  height: 45px;
+  resize: none;
+}
+
+/* SEPARACIÓN DE BOTONES ADD Y CANCEL */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  /* Espacio entre Add y Cancel */
+  padding: 0 0.9rem 1rem 0.9rem;
+  /* Espaciado inferior para móvil */
+}
+
+.actions button,
+.actions a.btnCancel {
+  all: unset;
+  flex: 1;
+  /* Para que ambos midan lo mismo en el móvil */
+  height: 35px;
+  /* Un poco más alto para el dedo */
+  background-color: #088395;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.actions button:hover,
+.actions a.btnCancel:hover {
+  opacity: 0.9;
+}
+
+/* VIEW SHOW ----------------------- */
+#show .show-pet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.6rem;
+  overflow-y: auto;
+}
+
+#show .photo img {
+  width: 110px;
+  height: 120px;
+  border: 2px solid #088395;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+#show .info {
+  width: 100%;
+}
+
+#show .info p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3rem 0;
+  border-bottom: 1px solid #7AB2B255;
+  font-size: 0.8rem;
+}
+
+#show .description-box {
+  margin-top: 0.5rem;
+  background: #fff;
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Animación */
+main.animateView {
+  animation: animateView 0.4s ease-in 1;
+}
+
+@keyframes animateView {
+  0% {
+    opacity: 0;
+    transform: scale(.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ESTILO CANCELAR */
+a.btnCancel {
+  background: #e53935 !important;
+  border: 1px solid #e53935 !important;
+  color: #fff !important;
+}
+
+a.btnCancel:hover {
+  background: #b71c1c !important;
+  border: 1px solid #b71c1c !important;
+}
+
+/* ===== FIX BUTTON ICONS ===== */
+
+/* Tamaño real del icono */
+#dashboard .top-actions a img {
+  width: 600px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.btnBack {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
