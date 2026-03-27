@@ -29,10 +29,7 @@ function Dashboard() {
             icon: "success"
         }).then(() => {
 
-            // eliminar token
             localStorage.removeItem("token");
-
-            // volver al login
             navigate("/");
 
         });
@@ -74,12 +71,10 @@ function Dashboard() {
                         icon: "success"
                     });
 
-                    // actualizar lista
                     setPets(pets.filter(pet => pet.id !== petId));
 
                 } catch (error) {
 
-                    // SI EL TOKEN ES INVALIDO
                     if (error.response?.status === 401) {
 
                         localStorage.removeItem("token");
@@ -87,19 +82,17 @@ function Dashboard() {
                         Swal.fire({
                             icon: "warning",
                             title: "Sesión expirada",
-                            text: "Debes iniciar sesión nuevamente"
+                            text: error.response?.data?.message || "Debes iniciar sesión nuevamente"
                         });
 
                         navigate("/");
 
-                    }
-
-                    else {
+                    } else {
 
                         Swal.fire({
                             icon: "error",
                             title: "Error",
-                            text: "No se pudo eliminar la mascota"
+                            text: error.response?.data?.message || "Error del servidor"
                         });
 
                     }
@@ -119,12 +112,9 @@ function Dashboard() {
 
         const token = localStorage.getItem("token");
 
-        // si no hay token vuelve al login
         if (!token) {
-
             navigate("/");
             return;
-
         }
 
         const fetchPets = async () => {
@@ -151,7 +141,6 @@ function Dashboard() {
 
                 console.error(error);
 
-                // SI EL TOKEN ES INVALIDO
                 if (error.response?.status === 401) {
 
                     localStorage.removeItem("token");
@@ -159,10 +148,18 @@ function Dashboard() {
                     Swal.fire({
                         icon: "warning",
                         title: "Sesión expirada",
-                        text: "Debes iniciar sesión nuevamente"
+                        text: error.response?.data?.message || "Debes iniciar sesión nuevamente"
                     });
 
                     navigate("/");
+
+                } else {
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: error.response?.data?.message || "Error al cargar las mascotas"
+                    });
 
                 }
 
@@ -187,7 +184,6 @@ function Dashboard() {
 
             <nav className="top-actions">
 
-                {/* BOTON AGREGAR */}
                 <a
                     href="#!"
                     className="btnAdd"
@@ -199,7 +195,6 @@ function Dashboard() {
                     <img src="/imgs/btn-add.png" alt="Add" />
                 </a>
 
-                {/* BOTON LOGOUT */}
                 <a
                     href="#!"
                     className="btnLogout"
@@ -221,7 +216,6 @@ function Dashboard() {
 
                     <div className="row" key={pet.id}>
 
-                        {/* IMAGEN DE LA MASCOTA */}
                         <img
                             src={
                                 pet.image
@@ -231,7 +225,6 @@ function Dashboard() {
                             alt={pet.name}
                         />
 
-                        {/* INFORMACION */}
                         <div className="data">
 
                             <h3>{pet.name}</h3>
@@ -239,10 +232,8 @@ function Dashboard() {
 
                         </div>
 
-                        {/* BOTONES */}
                         <nav className="actions">
 
-                            {/* VER */}
                             <a
                                 href="#!"
                                 className="btnShow"
@@ -252,7 +243,6 @@ function Dashboard() {
                                 }}
                             ></a>
 
-                            {/* EDITAR */}
                             <a
                                 href="#!"
                                 className="btnEdit"
@@ -262,7 +252,6 @@ function Dashboard() {
                                 }}
                             ></a>
 
-                            {/* ELIMINAR */}
                             <a
                                 href="#!"
                                 className="btnDelete"

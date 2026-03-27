@@ -8,8 +8,8 @@ import Swal from "sweetalert2";
 
 function EditPet() {
 
-    const navigate = useNavigate(); // navegación entre páginas
-    const { id } = useParams(); // obtener id desde la URL
+    const navigate = useNavigate();
+    const { id } = useParams();
 
     // ---------------------------
     // ESTADO DE LA MASCOTA
@@ -31,7 +31,6 @@ function EditPet() {
 
         const token = localStorage.getItem("token");
 
-        // si no hay token vuelve al login
         if (!token) {
             navigate("/");
             return;
@@ -55,19 +54,17 @@ function EditPet() {
                     response.data.pet ||
                     (response.data.pets ? response.data.pets[0] : response.data);
 
-                // si el id no existe
                 if (!data) {
 
                     Swal.fire({
                         icon: "warning",
-                        title: "Mascota no encontrada",
-                        text: `No existe una mascota con ID ${id}`
+                        title: "Advertencia",
+                        text: response.data?.message || "Mascota no encontrada"
                     }).then(() => {
                         navigate("/dashboard");
                     });
 
                     return;
-
                 }
 
                 setPet(data);
@@ -76,20 +73,18 @@ function EditPet() {
 
                 console.error(error);
 
-                // error 404
                 if (error.response?.status === 404) {
 
                     Swal.fire({
                         icon: "warning",
-                        title: "Mascota no encontrada",
-                        text: `No existe una mascota con ID ${id}`
+                        title: "Advertencia",
+                        text: error.response?.data?.message || "Mascota no encontrada"
                     }).then(() => {
                         navigate("/dashboard");
                     });
 
                 }
 
-                // token inválido
                 else if (error.response?.status === 401) {
 
                     localStorage.removeItem("token");
@@ -97,7 +92,7 @@ function EditPet() {
                     Swal.fire({
                         icon: "warning",
                         title: "Sesión expirada",
-                        text: "Debes iniciar sesión nuevamente"
+                        text: error.response?.data?.message || "Debes iniciar sesión nuevamente"
                     }).then(() => {
                         navigate("/");
                     });
@@ -115,7 +110,7 @@ function EditPet() {
 
 
     // ---------------------------
-    // CAPTURAR INPUTS DEL FORMULARIO
+    // CAPTURAR INPUTS
     // ---------------------------
     const handleChange = (e) => {
 
@@ -129,7 +124,7 @@ function EditPet() {
 
 
     // ---------------------------
-    // EDITAR MASCOTAS
+    // EDITAR MASCOTA
     // ---------------------------
     const updatePet = async (e) => {
 
@@ -139,7 +134,7 @@ function EditPet() {
 
         try {
 
-            await axios.put(
+            const response = await axios.put(
                 `http://127.0.0.1:8000/api/pets/edit/${id}`,
                 pet,
                 {
@@ -152,7 +147,8 @@ function EditPet() {
 
             Swal.fire({
                 icon: "success",
-                title: "Mascota Editada correctamente"
+                title: "Mascota actualizada",
+                text: response.data?.message || "La mascota fue actualizada correctamente"
             }).then(() => {
 
                 navigate("/dashboard");
@@ -166,7 +162,7 @@ function EditPet() {
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "No se pudo actualizar la mascota"
+                text: error.response?.data?.message || "Error al actualizar la mascota"
             });
 
         }

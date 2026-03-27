@@ -29,8 +29,7 @@ function Login() {
 
             // ALERTA DE LOGIN EXITOSO
             Swal.fire({
-                title: "Bienvenido 🐶",
-                text: "Login exitoso",
+                title: "Login Exitoso",
                 icon: "success",
                 draggable: true
             }).then(() => {

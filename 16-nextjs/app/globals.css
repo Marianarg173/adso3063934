@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* 🌌 FONDO GAMER */
+body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
+}
+
+/* 🎮 CARD NEON */
+.card-neon {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card-neon:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.card-content {
+  background: rgba(10, 10, 15, 0.95);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.card-neon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    #00ffff,
+    #ff00ff,
+    transparent
+  );
+
+  background-size: 300% 300%;
+  animation: neon 4s linear infinite;
+
+  opacity: 0;
+  transition: 0.3s;
+
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 2px;
+}
+
+.card-neon:hover::before {
+  opacity: 1;
+}
+
+@keyframes neon {
+  0% { background-position: 0% }
+  100% { background-position: 300% }
+}
+
+/* 🔥 BOTÓN GAMER PRO */
+.btn-gamer {
+  background: linear-gradient(135deg, #ff00ff, #00ffff);
+  color: black;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gamer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%);
+}
+
+.btn-gamer:hover::after {
+  animation: shine 0.8s forwards;
+}
+
+.btn-gamer:hover {
+  box-shadow: 0 0 20px #00ffff;
+  transform: scale(1.05);
+}
+
+/* ✨ INPUT GAMER */
+.input-gamer {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  transition: 0.3s;
+}
+
+.input-gamer:focus {
+  outline: none;
+  border-color: #22d3ee;
+  box-shadow: 0 0 12px rgba(34,211,238,0.5);
+}
+
+/* 🎞️ ANIMACIONES */
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
