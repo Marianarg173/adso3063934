@@ -1,14 +1,10 @@
+// app/games/page.tsx
 import { stackServerApp } from "@/stack/server";
 import { redirect } from "next/navigation";
-import SideBar from "@/components/SideBar";
 import GamesInfo from "@/components/GamesInfo";
-import { deleteGame } from "@/app/actions/gameActions";
 
-
-export default async function GamesPage({
-  searchParams,
-}: {
-  searchParams: { search?: string; page?: string };
+export default async function GamesPage(props: {
+  searchParams: Promise<{ search?: string; page?: string }>;
 }) {
   const user = await stackServerApp.getUser();
 
@@ -17,8 +13,9 @@ export default async function GamesPage({
   }
 
   return (
-    <SideBar currentPath="/games">
-      <GamesInfo searchParams={searchParams} />
-    </SideBar>
+    /* YA NO USES <SideBar> AQUÍ. El layout ya lo incluye. */
+    <div className="w-full">
+       <GamesInfo searchParams={props.searchParams} />
+    </div>
   );
 }
