@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohana - Add Character</title>
+    <!-- Ruta corregida saliendo de la carpeta con ../ -->
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+    <div class="phone-container characters-add-page" style="display: flex;">
+
+        <div class="header-blue-title">
+            ADD CHARACTER <img src="../img/Stitch_add.png" class="header-stitch-avatar">
+        </div>
+
+        <div class="char-back-navigation">
+            <a href="../characters.html"><img src="../img/regre.png" alt="Back"></a>
+        </div>
+
+        <div class="char-upload-box-section">
+            <div class="char-image-dropzone">
+                <div class="dropzone-plus-icon">+</div>
+            </div>
+        </div>
+
+        <div class="char-form-fields">
+            <input type="text" placeholder="Name" class="char-input-field">
+
+            <select class="char-select-field">
+                <option value="" disabled selected>Kind</option>
+                <option>Humans</option>
+                <option>Alien</option>
+                <option>Experiment</option>
+                <option>Villain</option>
+            </select>
+
+            <textarea placeholder="Description" class="char-textarea-field"></textarea>
+        </div>
+
+        <div class="char-action-buttons">
+            <a href="../characters.html" class="btn-char-submit"
+                style="text-decoration: none; text-align: center;">Save</a>
+            <a href="../characters.html" class="btn-char-dismiss"
+                style="text-decoration: none; text-align: center;">Cancel</a>
+        </div>
+
+        <!-- Menú Inferior Fijo (Rutas apuntando afuera con ../) -->
+        <div class="bottom-navbar">
+            <a href="../dashboard.html" class="nav-item">
+                <img src="../img/das.png" alt="Dashboard">
+            </a>
+            <a href="../profile.html" class="nav-item">
+                <img src="../img/profile.png" alt="Profile">
+            </a>
+            <a href="../characters.html" class="nav-item active">
+                <img src="../img/characters.png" alt="Characters">
+            </a>
+            <a href="../kinds.html" class="nav-item">
+                <img src="../img/kind.png" alt="Kinds">
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohana App - Profile</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Quintessential&family=Fredoka+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Usamos la clase base del teléfono y añadimos "profile-page" -->
+    <div class="phone-container login-page profile-page">
+
+        <!-- Flecha de regreso superior izquierda -->
+        <a href="dashboard.html" class="back-arrow">
+            <img src="img/regreso.png" alt="Regresar">
+        </a>
+
+        <!-- Logo Ohana superior -->
+        <div class="welcome-logo-section">
+            <img src="img/logo.png" alt="Ohana Logo" class="logo-img">
+        </div>
+
+        <!-- Imagen de Stitch con gafas acostado sobre la tarjeta -->
+        <div class="stitch-profile-top">
+            <img src="img/stich-gafas.png" alt="Stitch con Gafas">
+        </div>
+
+        <!-- Tarjeta de Perfil -->
+        <div class="login-card profile-card">
+            <h2 class="login-card-title">PROFILE</h2>
+
+            <!-- Quitamos el action y method para evitar conflictos estáticos -->
+            <form class="profile-form" onsubmit="return false;">
+
+                <div class="input-group profile-group">
+                    <input type="text" value="Mariana" placeholder="First Name" required>
+                </div>
+
+                <div class="input-group profile-group">
+                    <input type="text" value="Ramirez" placeholder="Last Name" required>
+                </div>
+
+                <div class="input-group profile-group">
+                    <input type="email" value="ramirezgiraldomariana173@gmail.com" placeholder="Email" required>
+                </div>
+
+                <div class="input-group profile-group">
+                    <input type="text" value="3005670824" placeholder="Phone Number" required>
+                </div>
+
+                <div class="input-group profile-group">
+                    <input type="password" placeholder="Password">
+                </div>
+
+                <div class="input-group profile-group">
+                    <input type="password" placeholder="New Password">
+                </div>
+
+                <div class="input-group profile-group">
+                    <input type="password" placeholder="Confirm Password">
+                </div>
+
+                <!-- Contenedor para los dos botones inferiores en horizontal -->
+                <div class="profile-actions">
+                    <!-- Ambos botones ahora son enlaces directos para evitar el Error 405 -->
+                    <a href="dashboard.html" class="btn-profile btn-cancel"
+                        style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                    <a href="dashboard.html" class="btn-profile btn-keep"
+                        style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">Keep</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- BARRA DE NAVEGACIÓN INFERIOR (NAVBAR) -->
+        <div class="bottom-navbar">
+            <a href="dashboard.html" class="nav-item">
+                <img src="img/das.png" alt="Dashboard">
+            </a>
+            <!-- El de perfil está Activo e iluminado -->
+            <a href="profile.html" class="nav-item active">
+                <img src="img/profile.png" alt="Perfil">
+            </a>
+            <a href="characters.html" class="nav-item">
+                <img src="img/characters.png" alt="Tipos">
+            </a>
+            <a href="kinds.html" class="nav-item">
+                <img src="img/kind.png" alt="Ajustes">
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

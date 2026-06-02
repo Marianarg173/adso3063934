@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohana App - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Usamos la clase base "phone-container" y añadimos "dashboard-page" -->
+    <div class="phone-container dashboard-page">
+        
+        <!-- 1. BARRA SUPERIOR (HEADER) -->
+        <div class="dashboard-header">
+            <div class="profile-avatar">
+                <img src="img/dora.png" alt="Perfil"> 
+            </div>
+            <h1 class="dashboard-title">Dashboard</h1>
+            <a href="index.html" class="logout-icon">
+                <img src="img/logout.png" alt="Salir"> 
+            </a>
+        </div>
+
+        <!-- 2. CONTENEDOR DE TARJETAS (MÉTRICAS) -->
+        <div class="metrics-container">
+            <!-- Tarjeta de Personajes -->
+            <div class="metric-card">
+                <span class="metric-label">characters</span>
+                <span class="metric-value">20</span>
+            </div>
+            <!-- Tarjeta de Tipos -->
+            <div class="metric-card">
+                <span class="metric-label">kinds</span>
+                <span class="metric-value">5</span>
+            </div>
+        </div>
+
+        <!-- 3. SECCIÓN DE LA GRÁFICA CENTRAL -->
+        <div class="chart-container">
+            <div class="chart-wrapper">
+                <img src="img/grafica.png" alt="Gráfica de estadísticas" class="chart-img">
+            </div>
+        </div>
+
+        <!-- 4. BARRA DE NAVEGACIÓN INFERIOR (NAVBAR) -->
+        <div class="bottom-navbar">
+            <a href="dashboard.html" class="nav-item active">
+                <img src="img/das.png" alt="Dashboard">
+            </a>
+            <a href="profile.html" class="nav-item ">
+                <img src="img/profile.png" alt="profile">
+            </a>
+            <a href="characters.html" class="nav-item ">
+                <img src="img/characters.png" alt="characters">
+            </a>
+            <a href="kinds.html" class="nav-item">
+                <img src="img/kind.png" alt="kinds">
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

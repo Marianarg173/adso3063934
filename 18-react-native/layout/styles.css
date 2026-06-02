@@ -1,0 +1,1004 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Quintessential&family=Fredoka+One&display=swap');
+
+/* ==========================================================================
+   1. RESET Y CONFIGURACIÓN GENERAL
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   2. CONTENEDOR VERTICAL PLANO (Dimensiones iPhone)
+   ========================================================================== */
+.phone-container {
+    max-width: 380px;
+    width: 100%;
+    height: 760px;
+    background-image: url('img/fondo.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 25px;
+}
+
+@media (max-width: 420px) {
+    .phone-container {
+        height: auto;
+        min-height: 760px;
+    }
+}
+
+.page-visible {
+    display: flex;
+}
+
+.page-hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   3. SECCIÓN DEL LOGO (Posicionamiento Absoluto para Subirlo)
+   ========================================================================== */
+.welcome-logo-section {
+    position: absolute;
+    top: -19px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   4. ILUSTRACIÓN CENTRAL (Stitch)
+   ========================================================================== */
+.welcome-image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.stitch-welcome-img {
+    max-width: 230px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   5. TEXTOS (Títulos y Párrafos cursivos/estilizados)
+   ========================================================================== */
+.welcome-text-section {
+    text-align: center;
+    padding: 0 10px;
+    margin-top: -70px;
+    margin-bottom: 70px;
+}
+
+.welcome-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    font-family: 'Quintessential', cursive;
+}
+
+.welcome-description {
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Quintessential', cursive;
+}
+
+/* ==========================================================================
+   6. BOTONES (Fondo oscuro y bordes limpios)
+   ========================================================================== */
+.welcome-actions-section {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.btn-welcome {
+    width: 120px;
+    padding: 10px 0;
+    background: #003740;
+    border: 1px solid #003740;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-family: 'Quintessential', cursive;
+}
+
+.btn-welcome:hover {
+    background: #8FEAEC;
+}
+
+/* ==========================================================================
+   7. PANTALLA DE LOGIN
+   ========================================================================== */
+.phone-container.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 30px 25px 0 25px;
+}
+
+/* Flecha de regresar */
+.back-arrow {
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    z-index: 20;
+}
+
+.back-arrow img {
+    width: 32px;
+    height: auto;
+}
+
+/* Tarjeta contenedora azulada */
+.login-card {
+    background: #86c4cd53;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 35px 25px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    margin: 200px 0 0;
+    margin-bottom: 0;
+}
+
+.login-card-title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #003740;
+    margin-bottom: 30px;
+    letter-spacing: 1.5px;
+    font-family: 'Fredoka One', sans-serif;
+}
+
+/* Inputs y barras oscuras */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 43, 51, 0.45);
+    border-radius: 25px;
+    margin-bottom: 25px;
+    height: 44px;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-group.password-group {
+    justify-content: space-between;
+}
+
+.input-group input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.9rem;
+    width: 80%;
+    padding: 0 15px;
+}
+
+.input-group:not(.password-group) input {
+    padding-left: 55px;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Círculos blancos de los iconos */
+.icon-circle {
+    width: 44px;
+    height: 44px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-circle {
+    left: -2px;
+}
+
+.lock-circle {
+    right: -2px;
+}
+
+.icon-circle img {
+    width: 20px;
+    height: auto;
+}
+
+/* Botón interno "Login" */
+.btn-login-submit {
+    background: #002b33;
+    color: #ffffff;
+    border: none;
+    padding: 8px 35px;
+    font-family: 'Quintessential', cursive;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-login-submit:hover {
+    background: #86C3CD;
+    color: #002b33;
+}
+
+/* Stitch del final */
+.login-image-section {
+    position: absolute;
+    bottom: 0;
+    left: 1px;
+    width: auto;
+    z-index: 5;
+}
+
+.stitch-login-img {
+    max-width: 250px;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   8. AJUSTES EXCLUSIVOS PARA LA PANTALLA DE REGISTRO (MÁS COMPACTA)
+   ========================================================================== */
+.register-page .register-card {
+    margin-top: 160px;
+    padding: 18px 20px;
+}
+
+.register-page .login-card-title {
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.input-group.register-group {
+    justify-content: flex-start;
+    padding-left: 15px;
+    height: 38px;
+    margin-bottom: 12px;
+}
+
+.input-group.register-group input {
+    padding-left: 10px;
+    width: 85%;
+    font-size: 0.85rem;
+}
+
+.register-input-icon {
+    width: 16px;
+    height: auto;
+    opacity: 0.7;
+}
+
+.register-page .btn-login-submit {
+    margin-top: 5px;
+    padding: 6px 30px;
+}
+
+/* ==========================================================================
+   9. SECCIÓN EXCLUSIVA DEL DASHBOARD (Y NAVBAR INFERIOR)
+   ========================================================================== */
+.phone-container.dashboard-page {
+    justify-content: flex-start;
+    padding: 25px 20px;
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 40%),
+        url('img/Dashboard.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 1. Header Superior Translúcido */
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    padding: 10px 15px;
+    border-radius: 30px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.profile-avatar img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    object-fit: cover;
+}
+
+.dashboard-title {
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 1.3rem;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.logout-icon img {
+    width: 22px;
+    height: auto;
+    opacity: 0.8;
+}
+
+/* 2. Tarjetas de Métricas */
+.metrics-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.metric-card {
+    flex: 1;
+    background: rgba(41, 74, 92, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1.5px dashed rgba(143, 234, 236, 0.4);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #ffffff;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* 3. Contenedor de la Gráfica */
+.chart-container {
+    width: 100%;
+    border: 1px solid #00a2ff;
+    border-radius: 8px;
+    padding: 6px;
+    background: transparent;
+    margin-bottom: auto;
+}
+
+/* Ajuste: bajar un poco la gráfica en la vista de dashboard */
+.phone-container.dashboard-page .chart-container {
+    margin-top: 50px;
+    border: 1px solid rgb(0, 162, 255);
+    background: transparent;
+}
+
+.phone-container.dashboard-page .chart-wrapper {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(4px);
+}
+
+.chart-wrapper {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* 4. Barra de Navegación Inferior (Navbar unificada) */
+.bottom-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 12px;
+    border-radius: 6px;
+    margin-top: 12px;
+}
+
+.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid rgba(143, 234, 236, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.nav-item.active {
+    background: #4a7a96;
+    border: 2px solid #8FEAEC;
+    box-shadow: 0 0 10px rgba(143, 234, 236, 0.5);
+}
+
+/* Base de configuración de las imágenes de navegación */
+.nav-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* BOTÓN 1 (Dashboard) - Se queda en su tamaño original pequeño estándar */
+.nav-item:nth-child(1) img {
+    width: 28px;
+    height: 28px;
+}
+
+/* ¡AJUSTADO! BOTÓN 2 (Profile) - Subió a 34px para verse "medio grande" y equilibrado */
+.nav-item:nth-child(2) img {
+    width: 34px;
+    height: 34px;
+}
+
+/* BOTÓN 3 (Characters) y BOTÓN 4 (Kinds) - Se mantienen grandes y con ZOOM */
+.nav-item:nth-child(3) img,
+.nav-item:nth-child(4) img {
+    width: 44px;
+    height: 44px;
+    transform: scale(1.25);
+}
+
+.nav-item:not(.active) img {
+    opacity: 0.75;
+}
+
+.nav-item.active img {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   11. SEPARAR NAVBARS DE DASHBOARD Y PROFILE (Evitar que se combinen)
+   ========================================================================== */
+/* Posicionar la barra en el contenedor del teléfono para que no se solape */
+.phone-container.dashboard-page .bottom-navbar {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    z-index: 15;
+}
+
+/* En la página de perfil hacemos una variante visual y elevamos z-index */
+.phone-container.profile-page .bottom-navbar {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    z-index: 25;
+    background: rgba(0, 43, 51, 0.35);
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   10. SECCIÓN EXCLUSIVA DE LA PANTALLA DE PERFIL
+   ========================================================================== */
+.phone-container.profile-page {
+    justify-content: flex-start;
+    padding: 25px 20px 10px 20px;
+    background-image: url('img/fondo.jpg');
+    background-size: 100% 100%;
+}
+
+.profile-page .profile-card {
+    margin-top: 195px;
+    padding: 18px 20px;
+    position: relative;
+}
+
+.profile-page .login-card-title {
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+}
+
+.stitch-profile-top {
+    position: absolute;
+    top: 115px;
+    left: 40px;
+    z-index: 15;
+}
+
+.stitch-profile-top img {
+    width: 140px;
+    height: auto;
+}
+
+.input-group.profile-group {
+    height: 34px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.input-group.profile-group input {
+    padding-left: 15px;
+    width: 100%;
+    font-size: 0.85rem;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.btn-profile {
+    flex: 1;
+    background: #002b33;
+    color: #ffffff;
+    border: none;
+    padding: 6px 0;
+    font-family: 'Quintessential', cursive;
+    font-size: 0.95rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-profile:hover {
+    background: #86C3CD;
+    color: #002b33;
+}
+
+/* ==========================================================================
+   12. SECCIÓN MÓDULO CHARACTERS (ESTÁTICO REUTILIZABLE)
+   ========================================================================== */
+
+/* Ajustes comunes para las vistas del módulo */
+.characters-list-page,
+.characters-add-page,
+.characters-view-page,
+.characters-edit-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 25px 20px 20px 20px;
+    background-image: url('img/fondo_chara.png') !important;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Título superior azul con efecto blur */
+.header-blue-title {
+    background: rgba(41, 74, 92, 0.65);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    font-family: 'Fredoka One', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.header-stitch-avatar {
+    width: 28px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Navegación y Botón Añadir */
+.char-back-navigation {
+    width: fit-content;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.char-back-navigation img {
+    width: 24px;
+    height: auto;
+}
+
+.characters-top-actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.btn-add-char {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    width: 54px;
+    height: 34px;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+/* Buscador del módulo */
+.characters-search-bar {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.characters-search-bar input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.characters-search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* Grilla Scrollable de Tarjetas */
+.characters-main-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 2px;
+    margin-bottom: 75px;
+    /* Margen para no colisionar con la navbar fija */
+}
+
+.characters-main-grid::-webkit-scrollbar {
+    width: 0px;
+}
+
+.character-card-item {
+    text-align: center;
+}
+
+.char-thumb-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.char-thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Panel CRUD flotante transparente sobre las imágenes */
+.char-floating-crud {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    display: flex;
+    gap: 8px;
+    padding: 3px 12px;
+}
+
+.btn-crud-action {
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.character-item-name {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* Zonas de Carga de Imagen (Agregar / Editar) */
+.char-upload-box-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.char-image-dropzone {
+    width: 135px;
+    height: 135px;
+    background: linear-gradient(135deg, rgba(0, 85, 255, 0.3), rgba(170, 0, 255, 0.3));
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.dropzone-plus-icon {
+    font-size: 2.8rem;
+    color: #8feaec;
+    font-weight: 300;
+}
+
+.dropzone-preloaded-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dropzone-edit-overlay {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Campos de Formulario Personalizados */
+.char-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.char-input-field,
+.char-select-field,
+.char-textarea-field {
+    background: rgba(0, 43, 51, 0.45);
+    border: none;
+    outline: none;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.char-select-field {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ffffff'><path d='M2 4l4 4 4-4z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px) center;
+}
+
+.char-textarea-field {
+    height: 90px;
+    border-radius: 14px;
+    resize: none;
+}
+
+/* Descriptores de Texto para el modo Edición */
+.char-form-fields.labels-enabled {
+    gap: 8px;
+}
+
+.form-field-descriptor {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    padding-left: 6px;
+    margin-top: 4px;
+    text-align: left;
+}
+
+/* Vista Detalles (Líneas Blancas Gruesas Sólidas) */
+.char-avatar-view-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.char-profile-circle-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00a2ff;
+}
+
+.char-technical-sheet {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.technical-sheet-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.sheet-row-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 4px;
+    border-bottom: 3px solid #ffffff;
+    /* Las 3 líneas blancas características */
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.sheet-label {
+    font-weight: 400;
+}
+
+.sheet-value {
+    font-weight: 300;
+}
+
+/* Caja de visualización de descripción */
+.char-description-viewer {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 12px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.viewer-title {
+    font-size: 0.8rem;
+    color: #8feaec;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.viewer-content {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+/* Botones de Acción de Formularios */
+.char-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: auto;
+}
+
+.char-action-buttons.single-alignment {
+    margin-top: 5px;
+}
+
+.btn-char-submit,
+.btn-char-dismiss {
+    width: 110px;
+    padding: 8px 0;
+    background: #0A174E;
+    border: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+    font-family: 'Quintessential', cursive;
+}
+
+.btn-char-submit:hover,
+.btn-char-dismiss:hover {
+    background: #8688d2;
+    color: #002b33;
+}
+
+.long-version {
+    width: 130px;
+}
+
+/* Asegurar posicionamiento absoluto de la navbar en este módulo */
+.characters-list-page .bottom-navbar,
+.characters-add-page .bottom-navbar,
+.characters-view-page .bottom-navbar,
+.characters-edit-page .bottom-navbar {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    z-index: 25;
+}
+
+/* Ajuste para que las imágenes PNG del CRUD queden perfectas dentro del botón */
+.btn-crud-action {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    /* Quita espacios extra que empujen la imagen */
+}
+
+.crud-icon {
+    width: 16px !important;
+    /* Controla el ancho del icono */
+    height: 16px !important;
+    /* Controla el alto del icono */
+    object-fit: contain !important;
+    /* Evita que la imagen se deforme */
+}
+
+
