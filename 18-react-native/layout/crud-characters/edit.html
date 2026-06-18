@@ -23,31 +23,29 @@
 
         <div class="char-upload-box-section">
             <div class="char-image-dropzone modification-mode">
-                <img src="../img/stich_c.png" class="dropzone-preloaded-image">
+                <img src="../img/stich_c.png" id="char-img" class="dropzone-preloaded-image">
                 <div class="dropzone-edit-overlay">+</div>
             </div>
         </div>
 
         <div class="char-form-fields labels-enabled">
             <label class="form-field-descriptor">Name :</label>
-            <input type="text" value="Stitch" class="char-input-field">
+            <input type="text" id="char-name" value="Stitch" class="char-input-field">
 
             <label class="form-field-descriptor">Kind :</label>
-            <select class="char-select-field">
+            <select id="char-kind" class="char-select-field">
                 <option>Humans</option>
                 <option>Alien</option>
                 <option selected>Experiment</option>
                 <option>Villain</option>
             </select>
 
-            <textarea class="char-textarea-field">Genetic experiment created by Dr. Jumba</textarea>
+            <textarea id="char-desc" class="char-textarea-field">Genetic experiment created by Dr. Jumba</textarea>
         </div>
 
         <div class="char-action-buttons">
-            <a href="../characters.html" class="btn-char-submit"
-                style="text-decoration: none; text-align: center;">Save</a>
-            <a href="../characters.html" class="btn-char-dismiss"
-                style="text-decoration: none; text-align: center;">Cancel</a>
+            <a href="#" id="btn-save" class="btn-char-submit" style="text-decoration: none; text-align: center;">Save</a>
+            <a href="../characters.html" class="btn-char-dismiss" style="text-decoration: none; text-align: center;">Cancel</a>
         </div>
 
         <!-- Menú Inferior Fijo (Rutas apuntando afuera con ../) -->
@@ -66,6 +64,30 @@
             </a>
         </div>
     </div>
+
+    <script>
+        (function(){
+            const chars = {
+                '1': {id:1, name:'Lilo', kind:'Humans', desc:'A brave young girl from Hawaii', img:'../img/lilo.png'},
+                '2': {id:2, name:'Nani', kind:'Humans', desc:'Lilo\'s older sister and caretaker', img:'../img/nani.png'},
+                '3': {id:3, name:'Stitch', kind:'Experiment', desc:'Genetic experiment created by Dr. Jumba', img:'../img/stich_c.png'},
+                '4': {id:4, name:'Pleakley', kind:'Alien', desc:'An expert on Earth cultures', img:'../img/pleakley.png'}
+            };
+            const url = new URL(window.location.href);
+            const id = url.searchParams.get('id') || '3';
+            const data = chars[id] || chars['3'];
+            document.getElementById('char-img').src = data.img;
+            document.getElementById('char-name').value = data.name;
+            document.getElementById('char-kind').value = data.kind;
+            document.getElementById('char-desc').value = data.desc;
+            
+            document.getElementById('btn-save').addEventListener('click', function(e){
+                e.preventDefault();
+                alert('Guardado: ' + document.getElementById('char-name').value);
+                window.location.href = '../characters.html';
+            });
+        })();
+    </script>
 
 </body>
 

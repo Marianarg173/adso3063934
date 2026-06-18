@@ -26,17 +26,17 @@
         </div>
 
         <div class="characters-main-grid">
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="1" data-name="Humans" data-desc="Human species" data-img="img/lilo.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/lilo.png" alt="Humans">
                     <div class="char-floating-crud">
-                        <a href="crud-kinds/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/show.html?id=1" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-kinds/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/edit.html?id=1" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -44,17 +44,17 @@
                 <p class="character-item-name">Humans</p>
             </div>
 
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="2" data-name="Alien" data-desc="Extraterrestrial beings" data-img="img/alien.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/alien.png" alt="Alien">
                     <div class="char-floating-crud">
-                        <a href="crud-kinds/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/show.html?id=2" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-kinds/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/edit.html?id=2" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -62,17 +62,17 @@
                 <p class="character-item-name">Alien</p>
             </div>
 
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="3" data-name="Experiment" data-desc="Genetic experiments" data-img="img/experiment.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/experiment.png" alt="Experiment">
                     <div class="char-floating-crud">
-                        <a href="crud-kinds/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/show.html?id=3" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-kinds/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/edit.html?id=3" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -80,17 +80,17 @@
                 <p class="character-item-name">Experiment</p>
             </div>
 
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="4" data-name="Villain" data-desc="Chaos personified. A character designed to break the rules" data-img="img/villain.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/villain.png" alt="Villain">
                     <div class="char-floating-crud">
-                        <a href="crud-kinds/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/show.html?id=4" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-kinds/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-kinds/edit.html?id=4" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <div class="bottom-navbar">
+            <div class="bottom-navbar">
             <a href="dashboard.html" class="nav-item">
                 <img src="img/das.png" alt="Dashboard">
             </a>
@@ -114,6 +114,19 @@
             </a>
         </div>
     </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('button[data-action="delete"]').forEach(function (btn) {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        if (!confirm('¿Eliminar este tipo (kind)?')) return;
+                        const card = btn.closest('.character-card-item');
+                        if (card) card.remove();
+                    });
+                });
+            });
+        </script>
 
 </body>
 

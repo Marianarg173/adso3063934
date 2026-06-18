@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar contraseña</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="phone-container login-page">
+
+        <a href="login.html" class="back-arrow">
+            <img src="img/regreso.png" alt="Regresar">
+        </a>
+
+        <div class="welcome-logo-section">
+            <img src="img/logo.png" alt="Ohana Logo" class="logo-img">
+        </div>
+
+        <div class="login-card">
+            <h2 class="login-card-title">RECUPERAR CONTRASEÑA</h2>
+
+            <form id="forgot-form" action="#" method="POST" class="login-form">
+
+                <div class="input-group">
+                    <div class="icon-circle user-circle">
+                        <img src="img/user.png" alt="Email">
+                    </div>
+                    <input type="email" id="email" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="welcome-actions-section">
+                    <button type="submit" class="btn-welcome login">Enviar correo</button>
+                </div>
+
+                <div style="text-align:center; margin-top:8px;">
+                    <a href="login.html" style="color:#8feaec; text-decoration:none;">Volver al login</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="login-image-section">
+            <img src="img/stich.png" alt="Stitch Sitting" class="stitch-login-img">
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('forgot-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var email = document.getElementById('email').value.trim();
+            if (!email) {
+                alert('Por favor ingresa tu correo.');
+                return;
+            }
+            // Simulación de envío de correo
+            alert('Se ha enviado un correo de recuperación a ' + email + '.');
+            // Redirigir al login
+            window.location.href = 'login.html';
+        });
+    </script>
+
+</body>
+
+</html>

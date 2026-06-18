@@ -26,17 +26,17 @@
         </div>
 
         <div class="characters-main-grid">
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="1" data-name="Lilo" data-kind="Humans" data-desc="A brave young girl from Hawaii" data-img="img/lilo.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/lilo.png" alt="Lilo">
                     <div class="char-floating-crud">
-                        <a href="crud-characters/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/show.html?id=1" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-characters/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/edit.html?id=1" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -44,17 +44,17 @@
                 <p class="character-item-name">Lilo</p>
             </div>
 
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="2" data-name="Nani" data-kind="Humans" data-desc="Lilo's older sister and caretaker" data-img="img/nani.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/nani.png" alt="Nani">
                     <div class="char-floating-crud">
-                        <a href="crud-characters/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/show.html?id=2" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-characters/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/edit.html?id=2" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -62,17 +62,17 @@
                 <p class="character-item-name">Nani</p>
             </div>
 
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="3" data-name="Stitch" data-kind="Experiment" data-desc="Genetic experiment created by Dr. Jumba" data-img="img/stich_c.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/stich_c.png" alt="Stitch">
                     <div class="char-floating-crud">
-                        <a href="crud-characters/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/show.html?id=3" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-characters/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/edit.html?id=3" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -80,17 +80,17 @@
                 <p class="character-item-name">Stitch</p>
             </div>
 
-            <div class="character-card-item">
+            <div class="character-card-item" data-id="4" data-name="Pleakley" data-kind="Alien" data-desc="An expert on Earth cultures" data-img="img/pleakley.png">
                 <div class="char-thumb-wrapper">
                     <img src="img/pleakley.png" alt="Pleakley">
                     <div class="char-floating-crud">
-                        <a href="crud-characters/show.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/show.html?id=4" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/view.png" alt="View" class="crud-icon">
                         </a>
-                        <a href="crud-characters/edit.html" class="btn-crud-action" style="text-decoration: none;">
+                        <a href="crud-characters/edit.html?id=4" class="btn-crud-action" style="text-decoration: none;">
                             <img src="img/edit.png" alt="Edit" class="crud-icon">
                         </a>
-                        <button class="btn-crud-action">
+                        <button class="btn-crud-action" data-action="delete">
                             <img src="img/delete.png" alt="Delete" class="crud-icon">
                         </button>
                     </div>
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <div class="bottom-navbar">
+            <div class="bottom-navbar">
             <a href="dashboard.html" class="nav-item">
                 <img src="img/das.png" alt="Dashboard">
             </a>
@@ -114,6 +114,20 @@
             </a>
         </div>
     </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('button[data-action="delete"]').forEach(function (btn) {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        if (!confirm('¿Eliminar este personaje?')) return;
+                        // Remueve la tarjeta del DOM (simula eliminación)
+                        const card = btn.closest('.character-card-item');
+                        if (card) card.remove();
+                    });
+                });
+            });
+        </script>
 
 </body>
 

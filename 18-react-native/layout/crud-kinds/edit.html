@@ -22,21 +22,20 @@
 
         <div class="char-upload-box-section">
             <div class="char-image-dropzone modification-mode">
-                <img src="../img/villain.png" class="dropzone-preloaded-image">
+                <img src="../img/villain.png" id="kind-img" class="dropzone-preloaded-image">
                 <div class="dropzone-edit-overlay">+</div>
             </div>
         </div>
 
         <div class="char-form-fields labels-enabled">
             <label class="form-field-descriptor">Name :</label>
-            <input type="text" value="villain" class="char-input-field">
-            <textarea class="char-textarea-field">Chaos personified. A character designed to break the rules....</textarea>
+            <input type="text" id="kind-name" value="villain" class="char-input-field">
+            <textarea id="kind-desc" class="char-textarea-field">Chaos personified. A character designed to break the rules....</textarea>
         </div>
 
         <div class="char-action-buttons">
-            <a href="../kinds.html" class="btn-char-submit" style="text-decoration: none; text-align: center;">Save</a>
-            <a href="../kinds.html" class="btn-char-dismiss"
-                style="text-decoration: none; text-align: center;">Cancel</a>
+            <a href="#" id="btn-save" class="btn-char-submit" style="text-decoration: none; text-align: center;">Save</a>
+            <a href="../kinds.html" class="btn-char-dismiss" style="text-decoration: none; text-align: center;">Cancel</a>
         </div>
 
         <div class="bottom-navbar">
@@ -54,6 +53,29 @@
             </a>
         </div>
     </div>
+
+    <script>
+        (function(){
+            const kinds = {
+                '1': {id:1, name:'Humans', desc:'Human species', img:'../img/lilo.png'},
+                '2': {id:2, name:'Alien', desc:'Extraterrestrial beings', img:'../img/alien.png'},
+                '3': {id:3, name:'Experiment', desc:'Genetic experiments', img:'../img/experiment.png'},
+                '4': {id:4, name:'Villain', desc:'Chaos personified. A character designed to break the rules', img:'../img/villain.png'}
+            };
+            const url = new URL(window.location.href);
+            const id = url.searchParams.get('id') || '4';
+            const data = kinds[id] || kinds['4'];
+            document.getElementById('kind-img').src = data.img;
+            document.getElementById('kind-name').value = data.name;
+            document.getElementById('kind-desc').value = data.desc;
+            
+            document.getElementById('btn-save').addEventListener('click', function(e){
+                e.preventDefault();
+                alert('Guardado: ' + document.getElementById('kind-name').value);
+                window.location.href = '../kinds.html';
+            });
+        })();
+    </script>
 
 </body>
 

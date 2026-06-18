@@ -21,7 +21,7 @@
         </div>
 
         <div class="char-avatar-view-container">
-            <img src="../img/villain.png" class="char-profile-circle-img">
+            <img src="../img/villain.png" id="kind-img" class="char-profile-circle-img">
         </div>
 
         <div class="char-technical-sheet">
@@ -29,22 +29,23 @@
 
             <div class="sheet-row-item">
                 <span class="sheet-label">ID:</span>
-                <span class="sheet-value">4</span>
+                <span class="sheet-value" id="kind-id">4</span>
             </div>
             <div class="sheet-row-item">
                 <span class="sheet-label">Name:</span>
-                <span class="sheet-value">villain</span>
+                <span class="sheet-value" id="kind-name">villain</span>
             </div>
         </div>
 
         <div class="char-description-viewer">
             <span class="viewer-title">Description</span>
-            <p class="viewer-content">Chaos personified. A character designed to break the rules....</p>
+            <p class="viewer-content" id="kind-desc">Chaos personified. A character designed to break the rules....</p>
         </div>
 
         <div class="char-action-buttons single-alignment">
             <a href="../kinds.html" class="btn-char-dismiss long-version"
                 style="text-decoration: none; text-align: center;">Cancel</a>
+    
         </div>
 
         <div class="bottom-navbar">
@@ -62,6 +63,24 @@
             </a>
         </div>
     </div>
+
+    <script>
+        (function(){
+            const kinds = {
+                '1': {id:1, name:'Humans', desc:'Human species', img:'../img/lilo.png'},
+                '2': {id:2, name:'Alien', desc:'Extraterrestrial beings', img:'../img/alien.png'},
+                '3': {id:3, name:'Experiment', desc:'Genetic experiments', img:'../img/experiment.png'},
+                '4': {id:4, name:'Villain', desc:'Chaos personified. A character designed to break the rules', img:'../img/villain.png'}
+            };
+            const url = new URL(window.location.href);
+            const id = url.searchParams.get('id') || '4';
+            const data = kinds[id] || kinds['4'];
+            document.getElementById('kind-id').textContent = data.id;
+            document.getElementById('kind-name').textContent = data.name;
+            document.getElementById('kind-desc').textContent = data.desc;
+            document.getElementById('kind-img').src = data.img;
+        })();
+    </script>
 
 </body>
 

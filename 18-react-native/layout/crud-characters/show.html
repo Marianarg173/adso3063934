@@ -22,7 +22,7 @@
         </div>
 
         <div class="char-avatar-view-container">
-            <img src="../img/stich_c.png" class="char-profile-circle-img">
+            <img src="../img/stich_c.png" id="char-img" class="char-profile-circle-img">
         </div>
 
         <div class="char-technical-sheet">
@@ -30,21 +30,21 @@
 
             <div class="sheet-row-item">
                 <span class="sheet-label">ID:</span>
-                <span class="sheet-value">3</span>
+                <span class="sheet-value" id="char-id">3</span>
             </div>
             <div class="sheet-row-item">
                 <span class="sheet-label">Name:</span>
-                <span class="sheet-value">Stitch</span>
+                <span class="sheet-value" id="char-name">Stitch</span>
             </div>
             <div class="sheet-row-item">
                 <span class="sheet-label">Kinds:</span>
-                <span class="sheet-value">Experiment</span>
+                <span class="sheet-value" id="char-kind">Experiment</span>
             </div>
         </div>
 
         <div class="char-description-viewer">
             <span class="viewer-title">Description</span>
-            <p class="viewer-content">Genetic experiment created by Dr. Jumba</p>
+            <p class="viewer-content" id="char-desc">Genetic experiment created by Dr. Jumba</p>
         </div>
 
         <div class="char-action-buttons single-alignment">
@@ -68,6 +68,25 @@
             </a>
         </div>
     </div>
+
+    <script>
+        (function(){
+            const chars = {
+                '1': {id:1, name:'Lilo', kind:'Humans', desc:'A brave young girl from Hawaii', img:'../img/lilo.png'},
+                '2': {id:2, name:'Nani', kind:'Humans', desc:'Lilo\'s older sister and caretaker', img:'../img/nani.png'},
+                '3': {id:3, name:'Stitch', kind:'Experiment', desc:'Genetic experiment created by Dr. Jumba', img:'../img/stich_c.png'},
+                '4': {id:4, name:'Pleakley', kind:'Alien', desc:'An expert on Earth cultures', img:'../img/pleakley.png'}
+            };
+            const url = new URL(window.location.href);
+            const id = url.searchParams.get('id') || '3';
+            const data = chars[id] || chars['3'];
+            document.getElementById('char-id').textContent = data.id;
+            document.getElementById('char-name').textContent = data.name;
+            document.getElementById('char-kind').textContent = data.kind;
+            document.getElementById('char-desc').textContent = data.desc;
+            document.getElementById('char-img').src = data.img;
+        })();
+    </script>
 
 </body>
 
